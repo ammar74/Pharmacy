@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".register.RegisterFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+       app:layout_constraintTop_toTopOf="parent"
+        android:text="Register as a Pharmacy"
+        android:textSize="30dp"
+        android:textColor="#2196F3"
+        android:textStyle="bold"
+        android:layout_marginTop="25sp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginBottom="50dp"
+        android:gravity="left" />
+
+    <TextView
+        android:id="@+id/PH_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/title"
+        android:text="Pharmacy Information"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp"
+        android:textColor="@color/black"
+        android:textStyle="bold"/>
+
+
+
+    <EditText
+        android:id="@+id/pharmacyNameET"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/PH_info"
+        android:layout_marginBottom="20dp"
+        android:layout_marginHorizontal="20dp"
+        android:text="Pharmacy Name"
+        android:textColor="#6C6B6E"/>
+
+    <EditText
+        android:id="@+id/pharmacyOwnerET"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/pharmacyNameET"
+        android:layout_margin="20dp"
+        android:text="Pharmacy Owner Name"
+        android:textColor="#6C6B6E"/>
+
+    <EditText
+        android:id="@+id/pharmacyEmailET"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/pharmacyOwnerET"
+        android:layout_margin="20dp"
+        android:text="Pharmacy Email"
+        android:textColor="#6C6B6E"/>
+
+    <EditText
+        android:id="@+id/pharmacyAddressET"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/pharmacyEmailET"
+        android:layout_margin="20dp"
+        android:text="Pharmacy Address"
+        android:textColor="#6C6B6E"/>
+
+    <LinearLayout
+        android:id="@+id/locationLinear"
+        android:weightSum="4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/pharmacyAddressET"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/pharmacyLocationET"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/pharmacyOwnerET"
+            android:layout_margin="20dp"
+            android:text="Pharmacy location"
+            android:textColor="#6C6B6E"/>
+
+        <ImageButton
+            android:id="@+id/PH_placeholder"
+            android:layout_width="match_parent"
+            android:layout_height="58dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="3"
+            android:src="@drawable/place"
+            android:background="@color/white"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/password_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/locationLinear"
+        android:text="Password"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp"
+        android:textColor="@color/black"
+        android:textStyle="bold"/>
+
+    <EditText
+        android:id="@+id/PH_passwordET"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/password_info"
+        android:layout_marginBottom="20dp"
+        android:layout_marginHorizontal="20dp"
+        android:text="Password"
+        android:textColor="#6C6B6E"/>
+
+    <EditText
+        android:id="@+id/confirm_PH_passwordET"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/PH_passwordET"
+        android:layout_margin="20dp"
+        android:text="Confirm Password"
+        android:textColor="#6C6B6E"/>
+
+    <Button
+        android:id="@+id/pharmacyRegisterBTN2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/confirm_PH_passwordET"
+        android:text="Register"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:layout_marginVertical="40dp"
+        android:layout_marginHorizontal="20dp"
+        android:background="@drawable/button_background"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

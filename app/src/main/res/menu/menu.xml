@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/current_orders"
+        android:icon="@drawable/orders"
+        android:title="Current Orders"
+        app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/orders_history"
+        android:icon="@drawable/orders_history"
+        android:title="Orders History"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/news"
+        android:icon="@drawable/news"
+        android:title="News"
+        app:showAsAction="always" />
+
+
+
+</menu>
