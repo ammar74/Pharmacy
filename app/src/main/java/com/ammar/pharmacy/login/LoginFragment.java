@@ -1,7 +1,6 @@
 package com.ammar.pharmacy.login;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -20,14 +19,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.ammar.pharmacy.CurrentOrdersFragment;
-import com.ammar.pharmacy.MainActivity;
+import com.ammar.pharmacy.mainFragments.CurrentOrdersFragment;
 import com.ammar.pharmacy.R;
 import com.ammar.pharmacy.register.RegisterFragment;
 import com.ammar.pharmacy.retrofit.APIHelper;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
-import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;

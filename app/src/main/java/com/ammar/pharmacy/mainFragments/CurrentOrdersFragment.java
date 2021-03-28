@@ -1,4 +1,4 @@
-package com.ammar.pharmacy;
+package com.ammar.pharmacy.mainFragments;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -11,6 +11,8 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.ammar.pharmacy.R;
 
 import static com.ammar.pharmacy.login.LoginFragment.token_key;
 
