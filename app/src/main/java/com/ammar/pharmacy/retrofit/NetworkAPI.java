@@ -17,7 +17,7 @@ public interface NetworkAPI {
     Call<LoginReturnBody> Login(@Body LoginObject loginObject);
 
     @POST("pharmacySignup")
-    Call<RegisterReturnBody> Register(@Body RegisterObject registerObject);
+    Call<RegisterReturnBody> register(@Body RegisterObject registerObject);
 
     @POST("pharmacyAgree")
     Call<PharmacyRespond> Pharmacyagree(@Body PharmacyCheck pharmacyCheck);

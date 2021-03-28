@@ -2,13 +2,13 @@ package com.ammar.pharmacy.register;
 
 public class RegisterReturnBody {
 
-    private String massege;
+    private String message;
 
-    public String getMassege() {
-        return massege;
+    public String getMessage() {
+        return message;
     }
 
-    public void setMassege(String massege) {
-        this.massege = massege;
+    public void setMessage(String message) {
+        this.message = message;
     }
 }

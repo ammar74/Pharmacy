@@ -9,13 +9,14 @@ import android.view.View;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.ammar.pharmacy.login.LoginFragment;
 import com.ammar.pharmacy.register.RegisterFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import static com.google.android.material.bottomnavigation.BottomNavigationView.*;
 
-public class MainActivity extends AppCompatActivity implements OnClickListener {
+public class MainActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
-    Fragment fragment;
+    String token ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,32 +25,18 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         bottomNavigationView=findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-        Intent i=getIntent();
 
-
-     //  loadFragment(new LoginFragment());
-
-
-
-        // add fragment
-        //loadFragment(new CurrentOrdersFragment());
-
-    }
-
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.loginBTN:
-
-                break;
-            case R.id.registerBTN:
-
-                loadFragment(new RegisterFragment());
-
-                break;
+        if (token == null){
+            loadFragment(new LoginFragment());
+            bottomNavigationView.setVisibility(View.GONE);
+        } else {
+            // load any other fragment
         }
+
     }
+
+
+
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = item -> {
