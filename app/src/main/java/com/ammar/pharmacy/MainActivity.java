@@ -35,7 +35,9 @@ public class MainActivity extends AppCompatActivity {
             bottomNavigationView.setVisibility(View.GONE);
         } else {
             // load any other fragment
+            bottomNavigationView.setVisibility(View.VISIBLE);
             loadFragment(new CurrentOrdersFragment());
+
         }
 
     }

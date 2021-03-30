@@ -11,6 +11,8 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -33,7 +35,7 @@ import static com.ammar.pharmacy.retrofit.APIHelper.api;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link LoginFragment#newInstance} factory method to
+ * Use the {@link LoginFragment#} factory method to
  * create an instance of this fragment.
  */
 public class LoginFragment extends Fragment {
@@ -50,16 +52,25 @@ public class LoginFragment extends Fragment {
     }
 
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        setHasOptionsMenu(false);
         return inflater.inflate(R.layout.fragment_login, container, false);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        inflater.inflate(R.menu.option_menu,menu);
+        super.onCreateOptionsMenu(menu, inflater);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         bindViews(view);
         loginBTN.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -105,7 +116,10 @@ public class LoginFragment extends Fragment {
                     SharedPreferences sharedPref = getActivity().getSharedPreferences(
                             token_key, Context.MODE_PRIVATE);
                     sharedPref.edit().putString(token_key,body.getToken());
+                    getActivity().findViewById(R.id.bottomNavigationView).setVisibility(View.VISIBLE);
+                //  bottomNavigationView.setVisibility(View.VISIBLE);
                     loadFragment(new CurrentOrdersFragment());
+
                 }
             }
 

@@ -84,7 +84,7 @@
             android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/pharmacyOwnerET"
+            app:layout_constraintTop_toBottomOf="@id/pharmacyPhonesET"
             android:layout_margin="20dp"
             android:text="Pharmacy location"
             android:textColor="#6C6B6E"/>

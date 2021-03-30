@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.ammar.pharmacy.R;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
 public class OrdersHistoryFragment extends Fragment {
@@ -17,6 +18,8 @@ public class OrdersHistoryFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+
         return inflater.inflate(R.layout.fragment_orders_history, container, false);
+
     }
 }

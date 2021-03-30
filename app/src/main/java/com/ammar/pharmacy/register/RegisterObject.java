@@ -5,7 +5,7 @@ public class RegisterObject {
     private String email;
     private String password;
     private String confirmPassword;
-    private String[] phones;
+    private String  phones;
     private String locationAsAddress;
     private LocationAsCoordinates locationAsCoordinates;
 
@@ -52,11 +52,11 @@ public class RegisterObject {
         this.confirmPassword = confirmPassword;
     }
 
-    public String[] getPhones() {
+    public String getPhones() {
         return phones;
     }
 
-    public void setPhones(String[] phones) {
+    public void setPhones(String phones) {
         this.phones = phones;
     }
 
