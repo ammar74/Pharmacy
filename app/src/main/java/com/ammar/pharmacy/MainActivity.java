@@ -55,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
             case R.id.settings:
                 break;
             case R.id.about:
+                loadFragment(new AboutUsFragment());
                 break;
             case R.id.logout:
                 break;

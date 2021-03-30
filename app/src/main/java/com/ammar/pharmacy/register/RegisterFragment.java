@@ -35,7 +35,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
     private static final String TAG = "RegisterFragment";
 
     TextView title, PH_info, password_info;
-    EditText pharmacyNameET, pharmacyOwnerET, pharmacyEmailET, pharmacyAddressET, pharmacyLocationET,
+    EditText pharmacyNameET, pharmacyPhonesET, pharmacyEmailET, pharmacyAddressET, pharmacyLocationET,
             PH_passwordET, confirm_PH_passwordET;
     ImageButton PH_placeholder;
     LinearLayout locationLinear;
@@ -57,7 +57,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
         PH_info = root.findViewById(R.id.PH_info);
         password_info = root.findViewById(R.id.password_info);
         pharmacyNameET = root.findViewById(R.id.pharmacyNameET);
-        pharmacyOwnerET = root.findViewById(R.id.pharmacyOwnerET);
+        pharmacyPhonesET = root.findViewById(R.id.pharmacyPhonesET);
         pharmacyEmailET = root.findViewById(R.id.pharmacyEmailET);
         pharmacyAddressET = root.findViewById(R.id.pharmacyAddressET);
         pharmacyLocationET = root.findViewById(R.id.pharmacyLocationET);
@@ -72,13 +72,12 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-         String[] arr = {"201026488962"};
-        RegisterObject registerObject = new RegisterObject("Ammar",
-                "ammaryasser3016@gmail.com",
-                "Aa12345678",
-                "Aa12345678",
-                arr,
-                "dfgh",
+        RegisterObject registerObject = new RegisterObject(pharmacyNameET.getText().toString(),
+                pharmacyEmailET.getText().toString(),
+                PH_passwordET.getText().toString(),
+                confirm_PH_passwordET.getText().toString(),
+                pharmacyPhonesET.getText().toString(),
+                pharmacyLocationET.getText().toString(),
                 new LocationAsCoordinates(new Coordinates(30.01563216, 31.208853)));
 
         switch (v.getId()) {

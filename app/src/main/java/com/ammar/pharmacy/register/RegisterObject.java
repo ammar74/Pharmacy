@@ -10,7 +10,7 @@ public class RegisterObject {
     private LocationAsCoordinates locationAsCoordinates;
 
 
-    public RegisterObject(String name, String email, String password, String confirmPassword, String[] phones, String locationAsAddress, LocationAsCoordinates locationAsCoordinates) {
+    public RegisterObject(String name, String email, String password, String confirmPassword, String phones, String locationAsAddress, LocationAsCoordinates locationAsCoordinates) {
         this.name = name;
         this.email = email;
         this.password = password;
