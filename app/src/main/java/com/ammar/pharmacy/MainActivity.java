@@ -12,9 +12,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.ammar.pharmacy.login.LoginFragment;
-import com.ammar.pharmacy.mainFragments.CurrentOrdersFragment;
-import com.ammar.pharmacy.mainFragments.NewsFragment;
-import com.ammar.pharmacy.mainFragments.OrdersHistoryFragment;
+import com.ammar.pharmacy.orders.CurrentOrdersFragment;
+import com.ammar.pharmacy.news.NewsFragment;
+import com.ammar.pharmacy.orders.OrdersHistoryFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {

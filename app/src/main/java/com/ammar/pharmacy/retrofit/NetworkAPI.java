@@ -2,6 +2,8 @@ package com.ammar.pharmacy.retrofit;
 
 import com.ammar.pharmacy.PharmacyCheck;
 import com.ammar.pharmacy.PharmacyRespond;
+import com.ammar.pharmacy.orders.GetOrdersObject;
+import com.ammar.pharmacy.orders.GetOrdersReturnBody;
 import com.ammar.pharmacy.login.LoginObject;
 import com.ammar.pharmacy.login.LoginReturnBody;
 import com.ammar.pharmacy.register.RegisterObject;
@@ -19,10 +21,16 @@ public interface NetworkAPI {
     @POST("pharmacySignup")
     Call<RegisterReturnBody> register(@Body RegisterObject registerObject);
 
+    @GET("getOrders")
+    Call<GetOrdersReturnBody> getOrders(@Body GetOrdersObject getOrdersObject);
+
     @POST("pharmacyAgree")
     Call<PharmacyRespond> Pharmacyagree(@Body PharmacyCheck pharmacyCheck);
 
     @GET("pharmacyNotAgree")
     Call<PharmacyRespond> Pharmacynotagree(@Body PharmacyCheck pharmacyCheck);
+
+
+
 
 }

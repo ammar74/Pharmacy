@@ -21,7 +21,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.ammar.pharmacy.mainFragments.CurrentOrdersFragment;
+import com.ammar.pharmacy.orders.CurrentOrdersFragment;
 import com.ammar.pharmacy.R;
 import com.ammar.pharmacy.register.RegisterFragment;
 import com.ammar.pharmacy.retrofit.APIHelper;
@@ -70,7 +70,6 @@ public class LoginFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         bindViews(view);
         loginBTN.setOnClickListener(new View.OnClickListener() {
             @Override
