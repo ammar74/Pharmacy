@@ -58,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.about:
                 loadFragment(new AboutUsFragment());
+                //bottomNavigationView.setVisibility(View.INVISIBLE);
                 break;
             case R.id.logout:
                 break;

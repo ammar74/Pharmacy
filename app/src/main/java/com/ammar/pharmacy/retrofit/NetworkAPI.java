@@ -25,10 +25,10 @@ public interface NetworkAPI {
     Call<GetOrdersReturnBody> getOrders(@Body GetOrdersObject getOrdersObject);
 
     @POST("pharmacyAgree")
-    Call<PharmacyRespond> Pharmacyagree(@Body PharmacyCheck pharmacyCheck);
+    Call<PharmacyRespond> PharmacyAgree(@Body PharmacyCheck pharmacyCheck);
 
     @GET("pharmacyNotAgree")
-    Call<PharmacyRespond> Pharmacynotagree(@Body PharmacyCheck pharmacyCheck);
+    Call<PharmacyRespond> PharmacyNotAgree(@Body PharmacyCheck pharmacyCheck);
 
 
 

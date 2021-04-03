@@ -38,7 +38,8 @@ import static com.ammar.pharmacy.retrofit.APIHelper.api;
  * Use the {@link LoginFragment#} factory method to
  * create an instance of this fragment.
  */
-public class LoginFragment extends Fragment {
+public class
+LoginFragment extends Fragment {
     public static final String token_key = "100001" ;
     private static final String TAG = "LoginFragment";
     LinearLayout firstLinear, secondLinear, thirdLinear;
