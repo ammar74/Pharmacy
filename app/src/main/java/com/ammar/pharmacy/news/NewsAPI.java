@@ -8,14 +8,10 @@ import retrofit2.http.GET;
 import retrofit2.http.Query;
 
 public interface NewsAPI {
-    @GET("top-headlines")
-
-        @Query("country") String country=
-            @Query("category")category: String?,
-    @Query("apiKey")
-     Call<NewsResponse> String apiKey;
-
+   @GET("top-headlines")
+    public Call<NewsResponse> loadNews(@Query("country") String country,
+                                       @Query("category")String category,@Query("apiKey") String apiKey);
 
     }
 
-}
+

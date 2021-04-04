@@ -12,11 +12,17 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.ammar.pharmacy.R;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsHolder> {
 
-    List<Article> articles ;
+   public ArrayList<Article> articles ;
+
+   public NewsAdapter(ArrayList<Article> articles){
+       this.articles=articles;
+       notifyDataSetChanged();
+   }
 
 
     public class NewsHolder extends RecyclerView.ViewHolder {
@@ -50,7 +56,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsHolder> {
         String imagePath = articleItem.urlToImage;
         Picasso.get()
                 .load(imagePath)
-                .placeholder(R.drawable.)
+                .placeholder(R.drawable.medicines_news)
                 .into(holder.itemPoster);
     }
 
