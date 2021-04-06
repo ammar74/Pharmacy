@@ -9,6 +9,7 @@ public class NewsAPIHelper {
     public static NewsAPI api;
     public NewsAPIHelper(){
 
+
         Retrofit retrofit= new Retrofit.Builder()
                 .baseUrl("https://newsapi.org/v2/")
                 .addConverterFactory(GsonConverterFactory.create())

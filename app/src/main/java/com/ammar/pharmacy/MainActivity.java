@@ -78,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
                         return true;
                     case R.id.news:
                         loadFragment(new NewsFragment());
+
                         return true;
                 }
                 return false;

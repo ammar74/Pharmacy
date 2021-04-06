@@ -8,9 +8,11 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.ammar.pharmacy.R;
 
@@ -18,6 +20,7 @@ import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.Callback;
+import retrofit2.Response;
 
 import static com.ammar.pharmacy.news.NewsAPIHelper.api;
 
@@ -40,27 +43,50 @@ public class NewsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        NewsAdapter adapter=new NewsAdapter(articles);
         rv=view.findViewById(R.id.news_rv);
         rv.setLayoutManager(new LinearLayoutManager(getContext()));
 
-    }
-
-
-    public void loadNews(String country, String category, String apiKey){
-        NewsAPI newsAPI=new NewsAPI() {
-            @Override
-            public Call<NewsResponse> loadNews(String country, String category, String apiKey) {
-                api.loadNews("eg","health","4b9d06a498454da48992eec2590e60d2")
-                        .enqueue(new Callback<NewsResponse>);
-                return null;
-            }
-        };
-
-
+        loadNews("eg","health","4b9d06a498454da48992eec2590e60d2");
+        if(articles!=null) {
+            NewsAdapter adapter=new NewsAdapter(articles);
+        }else {
+            Toast.makeText(getContext(),"No News is found",Toast.LENGTH_LONG).show();
         }
+
+
+
     }
+
+
+    public ArrayList<Article> loadNews(String country, String category, String apiKey) {
+        new NewsAPIHelper();
+        api.loadNews("eg","health","4b9d06a498454da48992eec2590e60d2").
+                enqueue(new Callback<NewsResponse>() {
+            @Override
+            public void onResponse(Call<NewsResponse> call, Response<NewsResponse> response) {
+                NewsResponse newsResponse=response.body();
+                Log.d(TAG,"message "+response.body().articles);
+                if(newsResponse!=null)
+                    articles= (ArrayList<Article>) newsResponse.articles;
+                else {
+                    articles=null;
+                    Log.d(TAG,"message: news is null");
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<NewsResponse> call, Throwable t) {
+                Log.d(TAG,  "message ",t);
+
+            }
+        });
+
+        return articles;
+
+    }
+    }
+
 
 
 

@@ -36,10 +36,10 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Order order=orderList.get(position);
-        holder.date_tv.setText(order.getDate());
-        holder.time_tv.setText(order.getTime());
-        holder.medicine_tv.setText(order.getMedcine());
-        holder.order_status_tv.setText(order.getStatus().toString());
+//        holder.date_tv.setText(order.getDate());
+//        holder.time_tv.setText(order.getTime());
+//        holder.medicine_tv.setText(order.getMedcine());
+//        holder.order_status_tv.setText(order.getStatus().toString());
 
     }
 

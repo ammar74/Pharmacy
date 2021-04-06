@@ -1,13 +1,18 @@
 package com.ammar.pharmacy.news;
 
 
+import java.util.ArrayList;
+import java.util.ArrayList;
+
 public class NewsResponse {
     String status ;
     int totalResults ;
+    ArrayList<Article> articles=new ArrayList<Article>();
 
-    public NewsResponse(String status, int totalResults) {
+    public NewsResponse(String status, int totalResults, ArrayList<Article> articles) {
         this.status = status;
         this.totalResults = totalResults;
+        this.articles=articles;
     }
 
     public String getStatus() {
@@ -24,5 +29,13 @@ public class NewsResponse {
 
     public void setTotalResults(int totalResults) {
         this.totalResults = totalResults;
+    }
+
+    public ArrayList<Article> getArticles() {
+        return articles;
+    }
+
+    public void setArticles(ArrayList<Article> articles) {
+        this.articles = articles;
     }
 }
