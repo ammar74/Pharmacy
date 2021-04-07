@@ -47,11 +47,6 @@ public class NewsFragment extends Fragment {
         rv.setLayoutManager(new LinearLayoutManager(getContext()));
 
         loadNews("eg","health","4b9d06a498454da48992eec2590e60d2");
-        if(articles!=null) {
-            NewsAdapter adapter=new NewsAdapter(articles);
-        }else {
-            Toast.makeText(getContext(),"No News is found",Toast.LENGTH_LONG).show();
-        }
 
 
 
@@ -66,8 +61,10 @@ public class NewsFragment extends Fragment {
             public void onResponse(Call<NewsResponse> call, Response<NewsResponse> response) {
                 NewsResponse newsResponse=response.body();
                 Log.d(TAG,"message "+response.body().articles);
-                if(newsResponse!=null)
-                    articles= (ArrayList<Article>) newsResponse.articles;
+                if(newsResponse.articles!=null){
+                    NewsAdapter adapter=new NewsAdapter(newsResponse.articles);
+                    rv.setAdapter(adapter);
+                }
                 else {
                     articles=null;
                     Log.d(TAG,"message: news is null");

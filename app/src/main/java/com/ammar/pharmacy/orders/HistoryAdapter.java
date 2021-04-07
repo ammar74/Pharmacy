@@ -19,7 +19,6 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
     List<Order> orderList;
     LayoutInflater layoutInflater;
     Context context;
-   OrdersAdapter.onOrderClick onOrderClick;
 
     public HistoryAdapter(List<Order> orderList, Context context) {
         this.orderList = orderList;
@@ -62,16 +61,6 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
             medicine_tv=itemView.findViewById(R.id.medicine_tv);
             order_status_tv=itemView.findViewById(R.id.order_status_tv);
 
-            medicine_tv.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if(onOrderClick!= null)
-                    {
-                    }
-
-
-                }
-            });
 
         }
     }

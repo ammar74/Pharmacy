@@ -115,7 +115,7 @@ LoginFragment extends Fragment {
                     getActivity();
                     SharedPreferences sharedPref = getActivity().getSharedPreferences(
                             token_key, Context.MODE_PRIVATE);
-                    sharedPref.edit().putString(token_key,body.getToken());
+                    sharedPref.edit().putString(token_key,body.getToken()).apply();
                     getActivity().findViewById(R.id.bottomNavigationView).setVisibility(View.VISIBLE);
                 //  bottomNavigationView.setVisibility(View.VISIBLE);
                     loadFragment(new CurrentOrdersFragment());

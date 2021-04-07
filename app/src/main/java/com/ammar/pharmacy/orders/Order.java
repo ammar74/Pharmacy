@@ -1,5 +1,7 @@
 package com.ammar.pharmacy.orders;
 
+import java.lang.String;
+
 import com.ammar.pharmacy.register.LocationAsCoordinates;
 
 import java.util.List;
@@ -12,12 +14,11 @@ public class Order {
     String globalStatus;
     String orderByPhoto;
     String orderByTexting;
-    List<CustomerID> CustomersID;
     String rate;
     String report;
 
     public Order(String _id, String customerID, String date, String globalStatus,
-                 String orderByPhoto, String orderByTexting, List<CustomerID> customersID,
+                 String orderByPhoto, String orderByTexting,
                  String rate, String report) {
         this._id = _id;
         this.customerID = customerID;
@@ -25,7 +26,6 @@ public class Order {
         this.globalStatus = globalStatus;
         this.orderByPhoto = orderByPhoto;
         this.orderByTexting = orderByTexting;
-        CustomersID = customersID;
         this.rate = rate;
         this.report = report;
     }
@@ -78,13 +78,6 @@ public class Order {
         this.orderByTexting = orderByTexting;
     }
 
-    public List<CustomerID> getCustomersID() {
-        return CustomersID;
-    }
-
-    public void setCustomersID(List<CustomerID> customersID) {
-        CustomersID = customersID;
-    }
 
     public String getRate() {
         return rate;

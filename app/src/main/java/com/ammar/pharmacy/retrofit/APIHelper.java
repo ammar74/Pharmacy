@@ -20,7 +20,7 @@ public class APIHelper {
                 .readTimeout(15, TimeUnit.MINUTES) // read timeout
                 .build();
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.1.5:3000/")
+                .baseUrl("http://192.168.1.7:3000/")
                 .addConverterFactory(GsonConverterFactory.create())
                // .client(client)
                 .build();

@@ -1,5 +1,6 @@
 package com.ammar.pharmacy.news;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,7 @@ import java.util.List;
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsHolder> {
 
    public ArrayList<Article> articles ;
+   public static final String TAG="NewsAdapter";
 
    public NewsAdapter(ArrayList<Article> articles){
        this.articles=articles;
@@ -52,7 +54,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsHolder> {
 
         Article  articleItem= articles.get(position);
         holder.itemTitle.setText(articleItem.title) ;
-
+        Log.d(TAG,"news Title is "+articleItem.title);
         String imagePath = articleItem.urlToImage;
         Picasso.get()
                 .load(imagePath)

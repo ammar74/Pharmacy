@@ -3,6 +3,8 @@ package com.ammar.pharmacy;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -17,9 +19,10 @@ import com.ammar.pharmacy.news.NewsFragment;
 import com.ammar.pharmacy.orders.OrdersHistoryFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import static com.ammar.pharmacy.login.LoginFragment.token_key;
+
 public class MainActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
-    String token ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,9 +30,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         bottomNavigationView=findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-
-
-
+        SharedPreferences sharedPref = this.getSharedPreferences(
+                token_key, Context.MODE_PRIVATE);
+        String token =sharedPref.getString(token_key, null);
         if (token == null){
             loadFragment(new LoginFragment());
             bottomNavigationView.setVisibility(View.GONE);
@@ -37,7 +40,6 @@ public class MainActivity extends AppCompatActivity {
             // load any other fragment
             bottomNavigationView.setVisibility(View.VISIBLE);
             loadFragment(new CurrentOrdersFragment());
-
         }
 
     }
@@ -61,7 +63,11 @@ public class MainActivity extends AppCompatActivity {
                 //bottomNavigationView.setVisibility(View.INVISIBLE);
                 break;
             case R.id.logout:
-                break;
+                SharedPreferences sharedPref = this.getSharedPreferences(
+                        token_key, Context.MODE_PRIVATE);
+                String token =sharedPref.getString("", null);
+                bottomNavigationView.setVisibility(View.GONE);
+                loadFragment(new LoginFragment());
         }
         return super.onOptionsItemSelected(item);
     }
@@ -78,8 +84,8 @@ public class MainActivity extends AppCompatActivity {
                         return true;
                     case R.id.news:
                         loadFragment(new NewsFragment());
-
                         return true;
+
                 }
                 return false;
             };
