@@ -2,6 +2,7 @@ package com.ammar.pharmacy.retrofit;
 
 import com.ammar.pharmacy.PharmacyRespond;
 import com.ammar.pharmacy.currentorder.GetOrdersReturnBody;
+import com.ammar.pharmacy.currentorder.IdWrapper;
 import com.ammar.pharmacy.login.LoginObject;
 import com.ammar.pharmacy.login.LoginReturnBody;
 import com.ammar.pharmacy.ordershistory.OrderHistoryResponse;
@@ -27,12 +28,11 @@ public interface NetworkAPI {
     @GET("pharmacyOrderHistory")
     Call<OrderHistoryResponse> pharmacyOrderHistory(@Header("token")String token);
 
+    @POST("pharmacyAgree")
+    Call<PharmacyRespond> PharmacyAgree(@Header("token")String token, @Body IdWrapper idWrapper);
 
-    @POST("pharmacyAgreeOrder")
-    Call<PharmacyRespond> PharmacyAgree(@Header("token")String token,@Body String order_id);
-
-    @GET("pharmacyNotAgree")
-    Call<PharmacyRespond> PharmacyNotAgree(@Header("token")String token,@Body String order_id);
+    @POST("pharmacyNotAgree")
+    Call<PharmacyRespond> PharmacyNotAgree(@Header("token")String token,@Body IdWrapper idWrapper);
 
 
 

@@ -14,13 +14,8 @@ public class APIHelper {
 
     public APIHelper ()
     {
-        OkHttpClient client   =  new OkHttpClient.Builder()
-                .connectTimeout(15, TimeUnit.MINUTES)
-                .writeTimeout(15, TimeUnit.MINUTES) // write timeout
-                .readTimeout(15, TimeUnit.MINUTES) // read timeout
-                .build();
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.1.7:3000/")
+                .baseUrl("http://192.168.1.6:3000/")
                 .addConverterFactory(GsonConverterFactory.create())
                // .client(client)
                 .build();

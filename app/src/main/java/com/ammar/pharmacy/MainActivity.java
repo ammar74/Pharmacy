@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.ammar.pharmacy.login.LoginFragment;
@@ -24,6 +25,7 @@ import static com.ammar.pharmacy.login.LoginFragment.token_key;
 
 public class MainActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
+    String token;
     public static final String TAG="MainActivity";
 
     @Override
@@ -34,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         SharedPreferences sharedPref = this.getSharedPreferences(
                 token_key, Context.MODE_PRIVATE);
-        String token =sharedPref.getString(token_key, null);
+         token =sharedPref.getString(token_key, null);
         if (token == null){
             loadFragment(new LoginFragment());
             bottomNavigationView.setVisibility(View.GONE);
@@ -88,6 +90,14 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             };
 
+    @Override
+    public void onBackPressed() {
+        if(token==null){
+            finish();
+        }else
+        super.onBackPressed();
+    }
+
     public void loadFragment(Fragment fragment) {
         // load fragment
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
@@ -95,11 +105,17 @@ public class MainActivity extends AppCompatActivity {
         transaction.addToBackStack(null);
         transaction.commit();
     }
+
+    public void removeFragment(){
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        //this will clear the back stack and displays no animation on the screen
+        fragmentManager.popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+    }
     public void logOut(){
         SharedPreferences sharedPref = this.getSharedPreferences(
                 token_key, Context.MODE_PRIVATE);
-        String token =sharedPref.getString("", null);
-        Log.d(TAG,"The token after log out is "+token);
+        sharedPref.edit().putString(token_key,null);
+        removeFragment();
         bottomNavigationView.setVisibility(View.GONE);
         loadFragment(new LoginFragment());
     }

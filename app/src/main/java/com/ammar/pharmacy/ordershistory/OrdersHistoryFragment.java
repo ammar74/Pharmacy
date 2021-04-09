@@ -23,7 +23,9 @@ import com.ammar.pharmacy.currentorder.Order;
 import com.ammar.pharmacy.retrofit.APIHelper;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
+import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -63,6 +65,12 @@ public class OrdersHistoryFragment extends Fragment {
 
     public List<Order> pharmacyOrderHistory(String token) {
         new APIHelper();
+        OkHttpClient.Builder builder = new OkHttpClient.Builder();
+        builder.connectTimeout(5, TimeUnit.MINUTES) // connect timeout
+                .writeTimeout(5, TimeUnit.MINUTES) // write timeout
+                .readTimeout(5, TimeUnit.MINUTES); // read timeout
+
+        OkHttpClient okHttpClient = builder.build();
         api.pharmacyOrderHistory(token).enqueue(new Callback<OrderHistoryResponse>() {
             @Override
             public void onResponse(Call<OrderHistoryResponse> call, Response<OrderHistoryResponse> response) {
@@ -75,7 +83,7 @@ public class OrdersHistoryFragment extends Fragment {
                 }else {
                     orders=null;
                     Log.d(TAG,"message: Orders History is null");
-                    Toast.makeText(getContext(),response.body().message,Toast.LENGTH_LONG);
+                    Toast.makeText(getContext(),response.body().message,Toast.LENGTH_LONG).show();
                     tv.setText(response.body().message);
                     no_history.setVisibility(View.VISIBLE);
 
