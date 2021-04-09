@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,15 +15,16 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.ammar.pharmacy.login.LoginFragment;
-import com.ammar.pharmacy.orders.CurrentOrdersFragment;
+import com.ammar.pharmacy.currentorder.CurrentOrdersFragment;
 import com.ammar.pharmacy.news.NewsFragment;
-import com.ammar.pharmacy.orders.OrdersHistoryFragment;
+import com.ammar.pharmacy.ordershistory.OrdersHistoryFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import static com.ammar.pharmacy.login.LoginFragment.token_key;
 
 public class MainActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
+    public static final String TAG="MainActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,11 +65,7 @@ public class MainActivity extends AppCompatActivity {
                 //bottomNavigationView.setVisibility(View.INVISIBLE);
                 break;
             case R.id.logout:
-                SharedPreferences sharedPref = this.getSharedPreferences(
-                        token_key, Context.MODE_PRIVATE);
-                String token =sharedPref.getString("", null);
-                bottomNavigationView.setVisibility(View.GONE);
-                loadFragment(new LoginFragment());
+                logOut();
         }
         return super.onOptionsItemSelected(item);
     }
@@ -97,6 +95,12 @@ public class MainActivity extends AppCompatActivity {
         transaction.addToBackStack(null);
         transaction.commit();
     }
-
-
+    public void logOut(){
+        SharedPreferences sharedPref = this.getSharedPreferences(
+                token_key, Context.MODE_PRIVATE);
+        String token =sharedPref.getString("", null);
+        Log.d(TAG,"The token after log out is "+token);
+        bottomNavigationView.setVisibility(View.GONE);
+        loadFragment(new LoginFragment());
+    }
 }

@@ -1,4 +1,4 @@
-package com.ammar.pharmacy.orders;
+package com.ammar.pharmacy.currentorder;
 
 public class GetOrdersObject {
     String token;

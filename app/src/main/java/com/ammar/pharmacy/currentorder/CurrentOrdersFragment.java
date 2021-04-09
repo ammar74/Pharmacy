@@ -1,4 +1,4 @@
-package com.ammar.pharmacy.orders;
+package com.ammar.pharmacy.currentorder;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -9,9 +9,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
-import android.os.Handler;
-import android.os.Looper;
 import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -22,19 +21,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.ammar.pharmacy.MainActivity;
+import com.ammar.pharmacy.PharmacyRespond;
 import com.ammar.pharmacy.R;
-import com.ammar.pharmacy.login.LoginObject;
-import com.ammar.pharmacy.login.LoginReturnBody;
 import com.ammar.pharmacy.retrofit.APIHelper;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.http.Body;
 
 import static com.ammar.pharmacy.login.LoginFragment.token_key;
 import static com.ammar.pharmacy.retrofit.APIHelper.api;
@@ -45,6 +40,7 @@ public class CurrentOrdersFragment extends Fragment {
     private TextView tv,PrescriptionDetails,PrescriptionDetails_tv,customer_name,
             customer_phone,customer_address ,order_time_tv,order_date_tv;
     private ImageView PrescriptionDetails_imageView;
+    String order_id;
     private Button pharmacyAcceptBTN,pharmacyRefuseBTN;
 
     @Override
@@ -57,6 +53,7 @@ public class CurrentOrdersFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        tv=view.findViewById(R.id.active_orders_tv);
         PrescriptionDetails = view.findViewById(R.id.PrescriptionDetails);
         PrescriptionDetails_tv = view.findViewById(R.id.PrescriptionDetails_tv);
         customer_name = view.findViewById(R.id.customer_name);
@@ -68,9 +65,25 @@ public class CurrentOrdersFragment extends Fragment {
         pharmacyAcceptBTN = view.findViewById(R.id.pharmacyAcceptBTN);
         pharmacyRefuseBTN = view.findViewById(R.id.pharmacyRefuseBTN);
 
+        SharedPreferences sharedPref = this.getActivity().getSharedPreferences(
+                token_key, Context.MODE_PRIVATE);
+        String token = "aaabbb"+sharedPref.getString(token_key, null);
+        Log.d(TAG,"the Coming token is "+token);
+        if (token != null) {
+            // make a request to retrieve an order
+            //    GetOrdersObject getOrdersObject=new GetOrdersObject("aaabbb"+token);
+            getOrders(token);
+        }else {
+            Log.d(TAG, "Token is Null ");
+            Toast.makeText(getContext(),"Failed to load Orders",Toast.LENGTH_LONG);
+        }
+
         pharmacyAcceptBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                PharmacyAgree(token,order_id);
+
+
 
             }
         });
@@ -81,18 +94,6 @@ public class CurrentOrdersFragment extends Fragment {
             }
         });
 
-        SharedPreferences sharedPref = this.getActivity().getSharedPreferences(
-                token_key, Context.MODE_PRIVATE);
-        String token = "aaabbb"+sharedPref.getString(token_key, null);
-        Log.d(TAG,"the Coming token is "+token);
-        if (token != null) {
-            // make a request to retrieve an order
-        //    GetOrdersObject getOrdersObject=new GetOrdersObject("aaabbb"+token);
-            getOrders(token);
-        }else {
-            Log.d(TAG, "Token is Null ");
-            Toast.makeText(getContext(),"Failed to load Orders",Toast.LENGTH_LONG);
-        }
     }
 
     public void getOrders(String token) {
@@ -102,6 +103,7 @@ public class CurrentOrdersFragment extends Fragment {
             public void onResponse(Call<GetOrdersReturnBody> call, Response<GetOrdersReturnBody> response) {
                 Log.d(TAG, "Get orders success  " + response.body().order.toString());
                 GetOrdersReturnBody body = response.body();
+                order_id =body.order._id;
                 if (body.order!= null){
                     String date = body.order.date.substring(0,10);
                     String time = body.order.date.substring(11,19);
@@ -123,6 +125,10 @@ public class CurrentOrdersFragment extends Fragment {
 
                 } else {
                     //toast message
+                    Log.d(TAG,"message: Orders History is null");
+                    Toast.makeText(getContext(),response.body().message,Toast.LENGTH_LONG);
+                    tv.setText(response.body().message);
+                    tv.setVisibility(View.VISIBLE);
                 }
 
 //                Handler handler = new Handler(Looper.getMainLooper());
@@ -144,6 +150,34 @@ public class CurrentOrdersFragment extends Fragment {
 
         });
 
+    }
+
+    public void PharmacyAgree(String token,String id){
+        new APIHelper();
+        api.PharmacyAgree(token,order_id).enqueue(new Callback<PharmacyRespond>() {
+            @Override
+            public void onResponse(Call<PharmacyRespond> call, Response<PharmacyRespond> response) {
+                Log.d(TAG,"order id is"+order_id);
+
+                Log.d(TAG, "Pharmacy Agree success " + response.body().getMsg());
+//                if (response.body().getMsg()!=null)
+//                    loadFragment(new CurrentOrdersFragment());
+            }
+
+            @Override
+            public void onFailure(Call<PharmacyRespond> call, Throwable t) {
+                Log.d(TAG, "Pharmacy Agree fail " +t);
+
+            }
+        });
+    }
+
+    public void loadFragment(Fragment fragment) {
+        // load fragment
+        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.frameContainer, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 
 }

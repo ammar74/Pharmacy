@@ -1,12 +1,10 @@
 package com.ammar.pharmacy.retrofit;
 
-import com.ammar.pharmacy.PharmacyCheck;
 import com.ammar.pharmacy.PharmacyRespond;
-import com.ammar.pharmacy.orders.GetOrdersObject;
-import com.ammar.pharmacy.orders.GetOrdersReturnBody;
+import com.ammar.pharmacy.currentorder.GetOrdersReturnBody;
 import com.ammar.pharmacy.login.LoginObject;
 import com.ammar.pharmacy.login.LoginReturnBody;
-import com.ammar.pharmacy.orders.History;
+import com.ammar.pharmacy.ordershistory.OrderHistoryResponse;
 import com.ammar.pharmacy.register.RegisterObject;
 import com.ammar.pharmacy.register.RegisterReturnBody;
 
@@ -26,15 +24,15 @@ public interface NetworkAPI {
     @GET("getOrders")
     Call<GetOrdersReturnBody> getOrders(@Header("token")String token );
 
-    @GET("medicalhistoryRetrieve")
-    Call<History> medicalHistoryRetrieve(@Header("token")String token);
+    @GET("pharmacyOrderHistory")
+    Call<OrderHistoryResponse> pharmacyOrderHistory(@Header("token")String token);
 
 
-    @POST("pharmacyAgree")
-    Call<PharmacyRespond> PharmacyAgree(@Body PharmacyCheck pharmacyCheck);
+    @POST("pharmacyAgreeOrder")
+    Call<PharmacyRespond> PharmacyAgree(@Header("token")String token,@Body String order_id);
 
     @GET("pharmacyNotAgree")
-    Call<PharmacyRespond> PharmacyNotAgree(@Body PharmacyCheck pharmacyCheck);
+    Call<PharmacyRespond> PharmacyNotAgree(@Header("token")String token,@Body String order_id);
 
 
 

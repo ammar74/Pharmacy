@@ -21,7 +21,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.ammar.pharmacy.orders.CurrentOrdersFragment;
+import com.ammar.pharmacy.currentorder.CurrentOrdersFragment;
 import com.ammar.pharmacy.R;
 import com.ammar.pharmacy.register.RegisterFragment;
 import com.ammar.pharmacy.retrofit.APIHelper;

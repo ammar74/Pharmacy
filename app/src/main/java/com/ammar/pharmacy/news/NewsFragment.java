@@ -37,7 +37,6 @@ public class NewsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_news, container, false);
-
     }
 
     @Override
@@ -55,8 +54,7 @@ public class NewsFragment extends Fragment {
 
     public ArrayList<Article> loadNews(String country, String category, String apiKey) {
         new NewsAPIHelper();
-        api.loadNews("eg","health","4b9d06a498454da48992eec2590e60d2").
-                enqueue(new Callback<NewsResponse>() {
+        api.loadNews(country,category,apiKey).enqueue(new Callback<NewsResponse>() {
             @Override
             public void onResponse(Call<NewsResponse> call, Response<NewsResponse> response) {
                 NewsResponse newsResponse=response.body();

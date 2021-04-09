@@ -1,10 +1,6 @@
-package com.ammar.pharmacy.orders;
+package com.ammar.pharmacy.currentorder;
 
 import java.lang.String;
-
-import com.ammar.pharmacy.register.LocationAsCoordinates;
-
-import java.util.List;
 
 public class Order {
 
