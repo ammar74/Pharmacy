@@ -28,4 +28,6 @@
         app:layout_constraintTop_toBottomOf="@id/moreInfo_TV"
         android:orientation="vertical"
         tools:listitem="@layout/more_row" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

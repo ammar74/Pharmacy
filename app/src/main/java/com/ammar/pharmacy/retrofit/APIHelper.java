@@ -15,7 +15,7 @@ public class APIHelper {
     public APIHelper ()
     {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.1.7:3000/")
+                .baseUrl("http://192.168.1.12:3000/")
                 .addConverterFactory(GsonConverterFactory.create())
                // .client(client)
                 .build();

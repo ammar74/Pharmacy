@@ -21,7 +21,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ammar.pharmacy.R;
-import com.ammar.pharmacy.currentorder.Order;
 import com.ammar.pharmacy.retrofit.APIHelper;
 
 import java.util.List;
@@ -41,7 +40,7 @@ public class OrdersHistoryFragment extends Fragment {
     ImageView no_history;
     RecyclerView rv;
     ProgressBar progressBar;
-    List<Order> orders;
+    List<PharmacyOrders> orders;
     private static final String TAG = "OrdersHistoryFragment";
 
     @Override
@@ -68,28 +67,27 @@ public class OrdersHistoryFragment extends Fragment {
                 progressBar.setVisibility(View.GONE);
                 rv.setVisibility(View.VISIBLE);
             }
-        },3500);
+        },1500);
         rv.setLayoutManager(new LinearLayoutManager(getContext()));
 
         pharmacyOrderHistory(token);
     }
 
-    public List<Order> pharmacyOrderHistory(String token) {
+    public void  pharmacyOrderHistory(String token) {
         new APIHelper();
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
         builder.connectTimeout(5, TimeUnit.MINUTES) // connect timeout
                 .writeTimeout(5, TimeUnit.MINUTES) // write timeout
                 .readTimeout(5, TimeUnit.MINUTES); // read timeout
-
         OkHttpClient okHttpClient = builder.build();
         api.pharmacyOrderHistory(token).enqueue(new Callback<OrderHistoryResponse>() {
             @Override
             public void onResponse(Call<OrderHistoryResponse> call, Response<OrderHistoryResponse> response) {
                 OrderHistoryResponse orderHistoryResponse=response.body();
                 Log.d(TAG,"ordersHistory message is "+response.body().message+
-                        "    the orders is "+response.body().orders);
-                if (orderHistoryResponse.orders!=null){
-                    HistoryAdapter adapter=new HistoryAdapter(orderHistoryResponse.orders);
+                        "    the orders is "+response.body().pharmacyOrders);
+                if (orderHistoryResponse.pharmacyOrders!=null){
+                    HistoryAdapter adapter=new HistoryAdapter(orderHistoryResponse.pharmacyOrders);
                     rv.setAdapter(adapter);
                 }else {
                     orders=null;
@@ -97,7 +95,6 @@ public class OrdersHistoryFragment extends Fragment {
                     Toast.makeText(getContext(),response.body().message,Toast.LENGTH_LONG).show();
                     tv.setText(response.body().message);
                     no_history.setVisibility(View.VISIBLE);
-
                 }
             }
 
@@ -106,6 +103,6 @@ public class OrdersHistoryFragment extends Fragment {
                 Log.d(TAG,  "message ",t);
             }
         });
-        return orders;
+
     }
 }

@@ -32,7 +32,6 @@ import static com.ammar.pharmacy.login.LoginFragment.token_key;
 public class MoreFragment extends Fragment {
     RecyclerView more_rv;
     List<MoreInfoItem> moreInfoList=new ArrayList<>();
-    BottomNavigationView bottomNavigationView;
     public static final String TAG="MoreFragment";
 
 
@@ -90,18 +89,23 @@ public class MoreFragment extends Fragment {
         transaction.commit();
     }
 
-    public void removeFragment(){
-        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-        fragmentManager.popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-    }
+//    public void removeFragment(){
+//        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+//        fragmentManager.popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+//    }
     public void logOut(){
         SharedPreferences sharedPref = getContext().getSharedPreferences(
                 token_key, Context.MODE_PRIVATE);
         sharedPref.edit().putString(token_key,null).apply();
 
-/*NULL POINTER EXCEPTION*/ removeFragment();
-
+/*NULL POINTER EXCEPTION*/ //removeFragment();
+   //     getActivity().finish();
+       // bottomNavigationView.setVisibility(View.GONE);
         loadFragment(new LoginFragment());
+        Toast.makeText(getContext(),"You Logged Out,you can Login again",Toast.LENGTH_LONG).show();
+
+
+
     }
 
 

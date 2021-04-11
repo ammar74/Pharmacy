@@ -1,5 +1,6 @@
 package com.ammar.pharmacy.retrofit;
 
+import com.ammar.pharmacy.currentorder.DoneOrderResponse;
 import com.ammar.pharmacy.currentorder.PharmacyRespond;
 import com.ammar.pharmacy.currentorder.GetOrdersReturnBody;
 import com.ammar.pharmacy.currentorder.IdWrapper;
@@ -33,6 +34,9 @@ public interface NetworkAPI {
 
     @POST("pharmacyNotAgree")
     Call<PharmacyRespond> PharmacyNotAgree(@Header("token")String token,@Body IdWrapper idWrapper);
+
+    @POST("doneorder")
+    Call<DoneOrderResponse> doneOrder(@Body String orderId);
 
 
 

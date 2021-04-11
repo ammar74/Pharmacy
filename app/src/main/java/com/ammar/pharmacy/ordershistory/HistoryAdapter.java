@@ -9,18 +9,17 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ammar.pharmacy.R;
-import com.ammar.pharmacy.currentorder.Order;
 
 import java.util.List;
 
 public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryHolder> {
 
 
-    List<Order> orders;
+    List<PharmacyOrders> pharmacyOrders;
     public static final String TAG="HistoryAdapter";
 
-    public HistoryAdapter(List<Order> orders) {
-        this.orders = orders;
+    public HistoryAdapter(List<PharmacyOrders> pharmacyOrders) {
+        this.pharmacyOrders = pharmacyOrders;
         notifyDataSetChanged();
     }
 
@@ -33,18 +32,18 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryH
 
     @Override
     public void onBindViewHolder(@NonNull HistoryHolder holder, int position) {
-        Order order=orders.get(position);
-        String date = order.getDate().substring(0,10);
-        String time = order.getDate().substring(11,19);
+        PharmacyOrders pharmacyOrdersItem=pharmacyOrders.get(position);
+        String date = pharmacyOrdersItem.getDate().substring(0,10);
+        String time = pharmacyOrdersItem.getDate().substring(11,19);
         holder.date_tv.setText(date);
         holder.time_tv.setText(time);
-        holder.medicine_tv.setText(order.getOrderByTexting());
-        holder.order_status_tv.setText(order.getGlobalStatus());
+        holder.medicine_tv.setText(pharmacyOrdersItem.getOrderByTexting());
+        holder.order_status_tv.setText(pharmacyOrdersItem.getGlobalStatus());
     }
 
     @Override
     public int getItemCount() {
-        return orders.size();
+        return pharmacyOrders.size();
     }
 
     public class HistoryHolder extends RecyclerView.ViewHolder {

@@ -19,6 +19,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ammar.pharmacy.currentorder.CurrentOrdersFragment;
@@ -45,8 +46,9 @@ LoginFragment extends Fragment {
     LinearLayout firstLinear, secondLinear, thirdLinear;
     ImageView pharmacyLogo, emailIV, passwordIV;
     EditText emailAddress, password;
+    TextView error;
     Button loginBTN, registerBTN;
-    BottomNavigationView bottomNavigationView;
+
 
     public LoginFragment() {
         // Required empty public constructor
@@ -97,6 +99,7 @@ LoginFragment extends Fragment {
         emailAddress = v.findViewById(R.id.emailAddress);
         passwordIV = v.findViewById(R.id.passwordIV);
         password = v.findViewById(R.id.password);
+        error=v.findViewById(R.id.error);
         loginBTN = v.findViewById(R.id.loginBTN);
         registerBTN = v.findViewById(R.id.registerBTN);
     }
@@ -107,6 +110,7 @@ LoginFragment extends Fragment {
             public void onResponse(Call<LoginReturnBody> call, Response<LoginReturnBody> response) {
                 assert response.body() != null;
                 Log.d(TAG, "Request success  is " + response.body().getMessage());
+
                 LoginReturnBody body = response.body();
                 String message = body.getMessage();
                 Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
@@ -120,6 +124,9 @@ LoginFragment extends Fragment {
                 //  bottomNavigationView.setVisibility(View.VISIBLE);
                     loadFragment(new CurrentOrdersFragment());
 
+                }else {
+                    error.setText(response.body().getMessage());
+                    error.setVisibility(View.VISIBLE);
                 }
             }
 

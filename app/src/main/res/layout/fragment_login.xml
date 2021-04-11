@@ -105,6 +105,19 @@
             android:textSize="16sp"
             android:textStyle="bold" />
 
+        <TextView
+            android:id="@+id/error"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Error message"
+            android:layout_marginStart="25dp"
+            android:textSize="25dp"
+            android:textColor="#C10404"
+            android:visibility="gone"
+            android:fontFamily="@font/bangers"/>
+
+
     </LinearLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

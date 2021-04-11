@@ -1,24 +1,21 @@
 package com.ammar.pharmacy.ordershistory;
 
-import com.ammar.pharmacy.currentorder.Order;
-
 import java.util.List;
 
 public  class OrderHistoryResponse{
-        List<Order> orders;
         String message;
+        List<PharmacyOrders> pharmacyOrders;
 
-        public OrderHistoryResponse(List<Order> orders, String message) {
-                this.orders = orders;
+
+        public OrderHistoryResponse(String message,List<PharmacyOrders> pharmacyOrders) {
+                this.pharmacyOrders = pharmacyOrders;
                 this.message = message;
         }
 
-        public List<Order> getOrders() {
-                return orders;
-        }
+        public List<PharmacyOrders> getOrders() { return pharmacyOrders; }
 
-        public void setOrders(List<Order> orders) {
-                this.orders = orders;
+        public void setOrders(List<PharmacyOrders> pharmacyOrders) {
+                this.pharmacyOrders = pharmacyOrders;
         }
 
         public String getMessage() {
