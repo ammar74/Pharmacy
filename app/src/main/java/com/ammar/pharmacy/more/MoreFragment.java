@@ -66,6 +66,7 @@ public class MoreFragment extends Fragment {
             public void onClickItem(int position) {
                 MoreInfoItem moreInfoItem = moreInfoList.get(position);
                 if (moreInfoItem.name.equals("Settings")) {
+                    Log.d(TAG,"Coming Soon..");
                     Toast.makeText(getContext(), "Coming Soon..", Toast.LENGTH_LONG).show();
 
                 } else if (moreInfoItem.name.equals("About Us")) {
@@ -82,22 +83,24 @@ public class MoreFragment extends Fragment {
     public void loadFragment(Fragment fragment) {
         // load fragment
         FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.frameContainer, fragment);
+
+
+/* NULL POINTER EXCEPTION*/ transaction.replace(R.id.frameContainer, fragment);
         transaction.addToBackStack(null);
         transaction.commit();
     }
 
     public void removeFragment(){
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-        //this will clear the back stack and displays no animation on the screen
         fragmentManager.popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
     }
     public void logOut(){
         SharedPreferences sharedPref = getContext().getSharedPreferences(
                 token_key, Context.MODE_PRIVATE);
         sharedPref.edit().putString(token_key,null).apply();
-        removeFragment();
-      //  bottomNavigationView.setVisibility(View.GONE);
+
+/*NULL POINTER EXCEPTION*/ removeFragment();
+
         loadFragment(new LoginFragment());
     }
 
