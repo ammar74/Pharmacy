@@ -1,20 +1,17 @@
 package com.ammar.pharmacy;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.ammar.pharmacy.acceptedorders.AcceptedOrdersFragment;
 import com.ammar.pharmacy.login.LoginFragment;
 import com.ammar.pharmacy.currentorder.CurrentOrdersFragment;
 import com.ammar.pharmacy.more.MoreFragment;
@@ -49,29 +46,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.option_menu,menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        int id= item.getItemId();
-
-        switch (id)
-        {
-            case R.id.settings:
-                break;
-            case R.id.about:
-                loadFragment(new AboutUsFragment());
-                //bottomNavigationView.setVisibility(View.INVISIBLE);
-                break;
-            case R.id.logout:
-                logOut();
-        }
-        return super.onOptionsItemSelected(item);
-    }
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = item -> {
@@ -86,7 +60,9 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.news:
                         loadFragment(new NewsFragment());
                         return true;
-
+                    case R.id.accepted_orders:
+                        loadFragment(new AcceptedOrdersFragment());
+                        return true;
                     case R.id.more:
                         loadFragment(new MoreFragment());
                         return true;

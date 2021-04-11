@@ -5,7 +5,14 @@
         android:id="@+id/current_orders"
         android:icon="@drawable/orders"
         android:title="Current Orders"
-        app:showAsAction="ifRoom"/>
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/accepted_orders"
+        android:icon="@drawable/ic_baseline_check_circle_24"
+        android:title="Accepted Orders"
+        app:showAsAction="always" />
+
     <item
         android:id="@+id/orders_history"
         android:icon="@drawable/orders_history"
