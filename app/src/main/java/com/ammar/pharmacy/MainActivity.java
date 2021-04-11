@@ -17,6 +17,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.ammar.pharmacy.login.LoginFragment;
 import com.ammar.pharmacy.currentorder.CurrentOrdersFragment;
+import com.ammar.pharmacy.more.MoreFragment;
 import com.ammar.pharmacy.news.NewsFragment;
 import com.ammar.pharmacy.ordershistory.OrdersHistoryFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -84,6 +85,10 @@ public class MainActivity extends AppCompatActivity {
                         return true;
                     case R.id.news:
                         loadFragment(new NewsFragment());
+                        return true;
+
+                    case R.id.more:
+                        loadFragment(new MoreFragment());
                         return true;
 
                 }

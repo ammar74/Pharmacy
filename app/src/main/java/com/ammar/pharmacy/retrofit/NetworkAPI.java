@@ -1,6 +1,6 @@
 package com.ammar.pharmacy.retrofit;
 
-import com.ammar.pharmacy.PharmacyRespond;
+import com.ammar.pharmacy.currentorder.PharmacyRespond;
 import com.ammar.pharmacy.currentorder.GetOrdersReturnBody;
 import com.ammar.pharmacy.currentorder.IdWrapper;
 import com.ammar.pharmacy.login.LoginObject;

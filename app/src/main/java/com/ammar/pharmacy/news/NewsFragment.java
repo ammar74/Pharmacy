@@ -8,10 +8,12 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.ammar.pharmacy.R;
@@ -27,6 +29,7 @@ import static com.ammar.pharmacy.news.NewsAPIHelper.api;
 
 public class NewsFragment extends Fragment {
     RecyclerView rv;
+    ProgressBar progressBar;
     ArrayList<Article> articles;
     private static final String TAG = "NewsFragment";
 
@@ -43,6 +46,14 @@ public class NewsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         rv=view.findViewById(R.id.news_rv);
+        progressBar=view.findViewById(R.id.progressBar);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                progressBar.setVisibility(View.GONE);
+                rv.setVisibility(View.VISIBLE);
+            }
+        },500);
         rv.setLayoutManager(new LinearLayoutManager(getContext()));
 
         loadNews("eg","health","4b9d06a498454da48992eec2590e60d2");

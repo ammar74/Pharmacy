@@ -18,6 +18,12 @@
         android:title="News"
         app:showAsAction="always" />
 
+    <item
+        android:id="@+id/more"
+        android:title="More.."
+        app:showAsAction="always"
+        android:icon="@drawable/ic_baseline_more_horiz_24"/>
+
 
 
 </menu>

@@ -10,11 +10,13 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,6 +40,7 @@ public class OrdersHistoryFragment extends Fragment {
     TextView tv;
     ImageView no_history;
     RecyclerView rv;
+    ProgressBar progressBar;
     List<Order> orders;
     private static final String TAG = "OrdersHistoryFragment";
 
@@ -57,7 +60,15 @@ public class OrdersHistoryFragment extends Fragment {
         Log.d(TAG,"the Coming token is "+token);
         rv=view.findViewById(R.id.ordersHistory_rv);
         tv=view.findViewById(R.id.orders_history_tv);
+        progressBar=view.findViewById(R.id.progressBar);
         no_history=view.findViewById(R.id.no_history);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                progressBar.setVisibility(View.GONE);
+                rv.setVisibility(View.VISIBLE);
+            }
+        },3500);
         rv.setLayoutManager(new LinearLayoutManager(getContext()));
 
         pharmacyOrderHistory(token);

@@ -1,4 +1,4 @@
-package com.ammar.pharmacy;
+package com.ammar.pharmacy.currentorder;
 
 public class PharmacyRespond {
     private String msg;

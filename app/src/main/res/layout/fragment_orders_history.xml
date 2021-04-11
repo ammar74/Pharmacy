@@ -7,6 +7,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ordershistory.OrdersHistoryFragment">
 
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:foregroundGravity="center"
+        android:indeterminate="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:progressDrawable="@drawable/circular_progress_bar"
+        android:background="@drawable/circle_shape"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:progress="10" />
+
     <TextView
         android:id="@+id/orders_history_tv"
         android:layout_width="match_parent"
@@ -16,6 +31,7 @@
         android:text="Orders History"
         android:textAlignment="center"
         android:textSize="34dp"
+        android:fontFamily="@font/bangers"
         android:textColor="#2196F3"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -37,6 +53,7 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/ordersHistory_rv"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
