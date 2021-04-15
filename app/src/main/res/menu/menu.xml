@@ -4,19 +4,19 @@
     <item
         android:id="@+id/current_orders"
         android:icon="@drawable/orders"
-        android:title="Current Orders"
+        android:title="Current Order"
         app:showAsAction="always"/>
 
     <item
         android:id="@+id/accepted_orders"
         android:icon="@drawable/ic_baseline_check_circle_24"
-        android:title="Accepted Orders"
+        android:title="Accepted"
         app:showAsAction="always" />
 
     <item
         android:id="@+id/orders_history"
         android:icon="@drawable/orders_history"
-        android:title="Orders History"
+        android:title="History"
         app:showAsAction="always" />
 
     <item

@@ -11,12 +11,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginHorizontal="8dp"
         android:layout_marginBottom="50dp"
         android:text="More Info"
         android:fontFamily="@font/bangers"
         android:textSize="36dp"
-        android:textColor="@color/basic"
+        android:textColor="@color/white"
+        android:background="@color/basic"
         android:textAlignment="center"/>
 
 

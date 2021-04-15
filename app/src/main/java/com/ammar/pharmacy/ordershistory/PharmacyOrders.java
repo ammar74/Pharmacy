@@ -100,5 +100,18 @@ public class PharmacyOrders {
         this.report = report;
     }
 
-
+    @Override
+    public String toString() {
+        return "PharmacyOrders{" +
+                "_id='" + _id + '\'' +
+                ", customerID='" + customerID + '\'' +
+                ", date='" + date + '\'' +
+                ", globalStatus='" + globalStatus + '\'' +
+                ", orderByPhoto='" + orderByPhoto + '\'' +
+                ", orderByTexting='" + orderByTexting + '\'' +
+                ", rate='" + rate + '\'' +
+                ", report='" + report + '\'' +
+                ", pharmaciesID=" + pharmaciesID +
+                '}';
+    }
 }

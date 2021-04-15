@@ -71,13 +71,13 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             };
 
-    @Override
-    public void onBackPressed() {
-        if(token==null){
-            finish();
-        }else
-        super.onBackPressed();
-    }
+//    @Override
+//    public void onBackPressed() {
+//        if(token==null){
+//            finish();
+//        }else
+//        super.onBackPressed();
+//    }
 
     public void loadFragment(Fragment fragment) {
         // load fragment
@@ -87,17 +87,17 @@ public class MainActivity extends AppCompatActivity {
         transaction.commit();
     }
 
-    public void removeFragment(){
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        //this will clear the back stack and displays no animation on the screen
-        fragmentManager.popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-    }
-    public void logOut(){
-        SharedPreferences sharedPref = this.getSharedPreferences(
-                token_key, Context.MODE_PRIVATE);
-        sharedPref.edit().putString(token_key,null);
-        removeFragment();
-        bottomNavigationView.setVisibility(View.GONE);
-        loadFragment(new LoginFragment());
-    }
+//    public void removeFragment(){
+//        FragmentManager fragmentManager = getSupportFragmentManager();
+//        //this will clear the back stack and displays no animation on the screen
+//        fragmentManager.popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+//    }
+//    public void logOut(){
+//        SharedPreferences sharedPref = this.getSharedPreferences(
+//                token_key, Context.MODE_PRIVATE);
+//        sharedPref.edit().putString(token_key,null);
+//        removeFragment();
+//        bottomNavigationView.setVisibility(View.GONE);
+//        loadFragment(new LoginFragment());
+//    }
 }

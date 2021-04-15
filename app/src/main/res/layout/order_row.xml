@@ -38,7 +38,17 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/order_status_tv"
             app:layout_constraintStart_toEndOf="@+id/date_tv"
+
             app:layout_constraintTop_toTopOf="parent" />
+        <ImageView
+            android:id="@+id/medicine_IV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/order_status_tv"
+            app:layout_constraintStart_toEndOf="@+id/date_tv"
+            app:layout_constraintTop_toTopOf="parent"
+            android:visibility="gone"/>
 
         <TextView
             android:id="@+id/order_status_tv"

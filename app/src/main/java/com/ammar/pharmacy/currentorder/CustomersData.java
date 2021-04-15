@@ -2,15 +2,15 @@ package com.ammar.pharmacy.currentorder;
 
 import com.ammar.pharmacy.register.LocationAsCoordinates;
 
-public class CustomerData {
+public class CustomersData {
     String name;
     String _id;
     String phone;
     String locationAsAddress;
     LocationAsCoordinates locationAsCoordinates;
 
-    public CustomerData(String name, String _id, String phone, String locationAsAddress,
-                        LocationAsCoordinates locationAsCoordinates) {
+    public CustomersData(String name, String _id, String phone, String locationAsAddress,
+                         LocationAsCoordinates locationAsCoordinates) {
         this.name = name;
         this._id = _id;
         this.phone = phone;
@@ -56,5 +56,16 @@ public class CustomerData {
 
     public void setLocationAsCoordinates(LocationAsCoordinates locationAsCoordinates) {
         this.locationAsCoordinates = locationAsCoordinates;
+    }
+
+    @Override
+    public String toString() {
+        return "CustomersData{" +
+                "name='" + name + '\'' +
+                ", _id='" + _id + '\'' +
+                ", phone='" + phone + '\'' +
+                ", locationAsAddress='" + locationAsAddress + '\'' +
+                ", locationAsCoordinates=" + locationAsCoordinates +
+                '}';
     }
 }

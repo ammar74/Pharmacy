@@ -32,7 +32,8 @@
         android:textAlignment="center"
         android:textSize="34dp"
         android:fontFamily="@font/bangers"
-        android:textColor="#2196F3"
+        android:textColor="@color/white"
+        android:background="@color/basic"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

@@ -2,12 +2,12 @@ package com.ammar.pharmacy.currentorder;
 
 public class GetOrdersReturnBody {
     Order order;
-    CustomerData customerData;
+    CustomersData customersData;
     String message;
 
-    public GetOrdersReturnBody(Order order, CustomerData customerData, String message) {
+    public GetOrdersReturnBody(Order order, CustomersData customersData, String message) {
         this.order = order;
-        this.customerData = customerData;
+        this.customersData = customersData;
         this.message = message;
     }
 
@@ -19,12 +19,12 @@ public class GetOrdersReturnBody {
         this.order = order;
     }
 
-    public CustomerData getCustomerData() {
-        return customerData;
+    public CustomersData getCustomersData() {
+        return customersData;
     }
 
-    public void setCustomerData(CustomerData customerData) {
-        this.customerData = customerData;
+    public void setCustomersData(CustomersData customersData) {
+        this.customersData = customersData;
     }
 
     public String getMessage() {

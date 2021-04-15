@@ -90,6 +90,20 @@ public class Order {
     public void setReport(String report) {
         this.report = report;
     }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "_id='" + _id + '\'' +
+                ", customerID='" + customerID + '\'' +
+                ", date='" + date + '\'' +
+                ", globalStatus='" + globalStatus + '\'' +
+                ", orderByPhoto='" + orderByPhoto + '\'' +
+                ", orderByTexting='" + orderByTexting + '\'' +
+                ", rate='" + rate + '\'' +
+                ", report='" + report + '\'' +
+                '}';
+    }
 }
 
 

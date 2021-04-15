@@ -1,17 +1,17 @@
 package com.ammar.pharmacy.currentorder;
 
 public class DoneOrderResponse {
-    String message;
+    String msg;
 
     public DoneOrderResponse(String message) {
-        this.message = message;
+        this.msg = message;
     }
 
     public String getMessage() {
-        return message;
+        return msg;
     }
 
     public void setMessage(String message) {
-        this.message = message;
+        this.msg = message;
     }
 }

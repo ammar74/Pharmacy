@@ -122,15 +122,15 @@ public class CurrentOrdersFragment extends Fragment {
                          PrescriptionDetails_imageView.setVisibility(View.VISIBLE);
                     }else {PrescriptionDetails_imageView.setVisibility(View.GONE);}
 
-                    customer_name.setText(body.customerData.name);
-                    customer_phone.setText(body.customerData.phone);
-                    customer_address.setText(body.customerData.locationAsAddress);
+                    customer_name.setText(body.customersData.name);
+                    customer_phone.setText(body.customersData.phone);
+                    customer_address.setText(body.customersData.locationAsAddress);
 
                 } else {
                     //toast message
                     Log.d(TAG,"message: No found orders");
                     Toast.makeText(getContext(),response.body().message,Toast.LENGTH_LONG).show();
-                    tv.setText(response.body().message);
+                    tv.setText("No Current Orders Yet");
                     no_order.setVisibility(View.VISIBLE);
                     order_time_tv.setVisibility(View.GONE);
                     order_date_tv.setVisibility(View.GONE);

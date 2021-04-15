@@ -5,32 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".currentorder.CurrentOrdersFragment">
-
-    <TextView
-        android:id="@+id/active_orders_tv"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="8dp"
-        android:layout_marginTop="8dp"
-        android:text="Active Orders"
-        android:textAlignment="center"
-        android:textSize="36dp"
-        android:fontFamily="@font/bangers"
-        android:textColor="@color/white"
-        android:background="@color/basic"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/no_order"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/active_orders_tv"
-        app:layout_constraintRight_toRightOf="parent"
-        android:visibility="gone"
-        android:src="@drawable/blank_inbox"/>
+    tools:context=".ordershistory.OrderInfoFragment">
 
     <TextView
         android:id="@+id/PrescriptionDetails_tv"
@@ -62,12 +37,12 @@
         android:id="@+id/PrescriptionDetails"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="26dp"
         android:text="Order Details"
         android:textSize="28sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/active_orders_tv" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/customer_name"
@@ -125,35 +100,6 @@
         app:layout_constraintTop_toBottomOf="@+id/PrescriptionDetails_imageView"
         app:layout_constraintRight_toRightOf="parent" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        app:layout_constraintTop_toBottomOf="@id/customer_address"
-        android:weightSum="2">
 
-        <Button
-            android:id="@+id/pharmacyAcceptBTN"
-            android:layout_weight="1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Accept"
-            android:background="@drawable/shape"
-            android:layout_marginVertical="20dp"
-            android:layout_marginHorizontal="20dp"/>
-
-        <Button
-            android:id="@+id/pharmacyRefuseBTN"
-            android:layout_weight="1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Refuse"
-            android:background="@drawable/shape"
-            android:layout_marginVertical="20dp"
-            android:layout_marginHorizontal="20dp"/>
-
-
-
-    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

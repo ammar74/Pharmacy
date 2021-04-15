@@ -79,9 +79,7 @@ public class MoreFragment extends Fragment {
     public void loadFragment(Fragment fragment) {
         // load fragment
         FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-
-
-/* NULL POINTER EXCEPTION*/ transaction.replace(R.id.frameContainer, fragment);
+        transaction.replace(R.id.frameContainer, fragment);
         transaction.addToBackStack(null);
         transaction.commit();
     }
@@ -94,17 +92,10 @@ public class MoreFragment extends Fragment {
         SharedPreferences sharedPref = getContext().getSharedPreferences(
                 token_key, Context.MODE_PRIVATE);
         sharedPref.edit().putString(token_key,null).apply();
-
-/*NULL POINTER EXCEPTION*/ //removeFragment();
-   //     getActivity().finish();
        // bottomNavigationView.setVisibility(View.GONE);
         loadFragment(new LoginFragment());
         Toast.makeText(getContext(),"You Logged Out,you can Login again",Toast.LENGTH_LONG).show();
 
-
-
     }
-
-
 
 }
