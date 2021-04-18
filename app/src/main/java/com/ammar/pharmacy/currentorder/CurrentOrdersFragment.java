@@ -70,7 +70,7 @@ public class CurrentOrdersFragment extends Fragment {
         Log.d(TAG,"the Coming token is "+token);
         if (!token.equals("aaabbb")) {
             // make a request to retrieve an order
-            //    GetOrdersObject getOrdersObject=new GetOrdersObject("aaabbb"+token);
+            GetOrdersObject getOrdersObject=new GetOrdersObject("aaabbb"+token);
             getOrders(token);
         }else {
             Log.d(TAG, "Token is Null ");
@@ -82,9 +82,7 @@ public class CurrentOrdersFragment extends Fragment {
             public void onClick(View v) {
                 Log.d(TAG,"prior calling agree fn: order id"+order_id);
                 PharmacyAgree(token,new IdWrapper(order_id));
-
-
-
+                loadFragment(new CurrentOrdersFragment());
             }
         });
         pharmacyRefuseBTN.setOnClickListener(new View.OnClickListener() {
@@ -104,8 +102,8 @@ public class CurrentOrdersFragment extends Fragment {
             public void onResponse(Call<GetOrdersReturnBody> call, Response<GetOrdersReturnBody> response) {
                 Log.d(TAG, "Get orders success  " + response.body());
                 GetOrdersReturnBody body = response.body();
-
-                if (body.order!= null){
+                if (body.order != null){
+                    Log.d(TAG,body.toString());
                     order_id =body.order._id;
                     Log.d(TAG,"onResponse: order id"+order_id);
                     String date = body.order.date.substring(0,10);
@@ -122,9 +120,9 @@ public class CurrentOrdersFragment extends Fragment {
                          PrescriptionDetails_imageView.setVisibility(View.VISIBLE);
                     }else {PrescriptionDetails_imageView.setVisibility(View.GONE);}
 
-                    customer_name.setText(body.customersData.name);
-                    customer_phone.setText(body.customersData.phone);
-                    customer_address.setText(body.customersData.locationAsAddress);
+                    customer_name.setText(body.customerData.name);
+                    customer_phone.setText(body.customerData.phone);
+                    customer_address.setText(body.customerData.locationAsAddress);
 
                 } else {
                     //toast message
@@ -142,7 +140,6 @@ public class CurrentOrdersFragment extends Fragment {
                     customer_address.setVisibility(View.GONE);
                     pharmacyAcceptBTN.setVisibility(View.GONE);
                     pharmacyRefuseBTN.setVisibility(View.GONE);
-
                 }
 
 //                Handler handler = new Handler(Looper.getMainLooper());
@@ -155,10 +152,21 @@ public class CurrentOrdersFragment extends Fragment {
 //               });
             }
 
-
             @Override
             public void onFailure(Call<GetOrdersReturnBody> call, Throwable t) {
                 Log.d(TAG, "Get Orders failed ", t);
+//                tv.setText("No Current Orders Yet");
+//                no_order.setVisibility(View.VISIBLE);
+//                order_time_tv.setVisibility(View.GONE);
+//                order_date_tv.setVisibility(View.GONE);
+//                PrescriptionDetails_tv.setVisibility(View.GONE);
+//                PrescriptionDetails_imageView.setVisibility(View.GONE);
+//                PrescriptionDetails.setVisibility(View.GONE);
+//                customer_name.setVisibility(View.GONE);
+//                customer_phone.setVisibility(View.GONE);
+//                customer_address.setVisibility(View.GONE);
+//                pharmacyAcceptBTN.setVisibility(View.GONE);
+//                pharmacyRefuseBTN.setVisibility(View.GONE);
             }
 
 
