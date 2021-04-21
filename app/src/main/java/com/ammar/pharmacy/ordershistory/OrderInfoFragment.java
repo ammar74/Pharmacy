@@ -61,57 +61,5 @@ public class OrderInfoFragment extends Fragment {
        //  orderInfo();
     }
 
-    public void orderInfo(String orderId){
-        new APIHelper();
-        api.orderInfo(orderId).enqueue(new Callback<OrderDetailsReturn>() {
-            @Override
-            public void onResponse(Call<OrderDetailsReturn> call, Response<OrderDetailsReturn> response) {
-                OrderDetailsReturn body= response.body();
-                String message= body.toString();
-                Log.d(TAG," order info is  "+message);
-                if (body.getOrder() != null){
-                    Log.d(TAG,body.toString());
-                    String orderId =body.getOrder().get_id();
-                    Log.d(TAG,"onResponse: order id"+orderId);
-                    String date = body.getOrder().getDate().substring(0,10);
-                    String time = body.getOrder().getDate().substring(11,19);
-                    order_time_tv.setText(time);
-                    order_date_tv.setText(date);
-                    if (body.getOrder().getOrderByTexting() !=null)
-                        PrescriptionDetails_tv.setText(body.getOrder().getOrderByTexting());
-                    else {PrescriptionDetails_tv.setVisibility(View.INVISIBLE);}
-                    if(body.getOrder().getOrderByPhoto() != null) {
-                        byte[] decodedString= Base64.decode(String.valueOf(body.getOrder().getOrderByPhoto()), Base64.DEFAULT);
-                        Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-                        PrescriptionDetails_imageView.setImageBitmap((decodedByte));
-                        PrescriptionDetails_imageView.setVisibility(View.VISIBLE);
-                    }else {PrescriptionDetails_imageView.setVisibility(View.GONE);}
 
-                    customer_name.setText(body.getCustomersData().getName());
-                    customer_phone.setText(body.getCustomersData().getPhone());
-                    customer_address.setText(body.getCustomersData().getLocationAsAddress());
-
-                } else {
-                    //toast message
-                    Log.d(TAG,"message: No found orders");
-                    tv.setText("No Current Orders Yet");
-                    no_order.setVisibility(View.VISIBLE);
-                    order_time_tv.setVisibility(View.GONE);
-                    order_date_tv.setVisibility(View.GONE);
-                    PrescriptionDetails_tv.setVisibility(View.GONE);
-                    PrescriptionDetails_imageView.setVisibility(View.GONE);
-                    PrescriptionDetails.setVisibility(View.GONE);
-                    customer_name.setVisibility(View.GONE);
-                    customer_phone.setVisibility(View.GONE);
-                    customer_address.setVisibility(View.GONE);
-                }
-
-            }
-
-            @Override
-            public void onFailure(Call<OrderDetailsReturn> call, Throwable t) {
-
-            }
-        });
-    }
 }

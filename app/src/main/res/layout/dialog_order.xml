@@ -36,65 +36,135 @@
         android:textSize="18sp"
         android:textColor="@color/white" />
 
-    <TextView
-        android:id="@+id/customer_name"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:layout_marginStart="16dp"
-        android:text="customer name"
-        android:textStyle="bold"
-        android:textColor="@color/white"
-        android:textSize="22sp" />
+        android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/customer_phone"
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:background="@color/basic"
+            android:src="@drawable/user"/>
+
+
+        <TextView
+            android:id="@+id/customer_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="16dp"
+            android:text="customer name"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:textSize="22sp" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:layout_marginStart="16dp"
-        android:text="customer phone"
-        android:textStyle="bold"
-        android:textColor="@color/white"
-        android:textSize="18sp" />
+        android:orientation="horizontal">
 
 
-    <TextView
-        android:id="@+id/customer_address"
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:background="@color/basic"
+            android:layout_marginStart="5dp"
+            android:src="@drawable/call"/>
+
+
+        <TextView
+            android:id="@+id/customer_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_gravity="center_vertical"
+            android:text="customer phone"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:layout_marginStart="16dp"
-        android:textStyle="bold"
-        android:text="55 hemo st , Giza "
-        android:textColor="@color/white"
-        android:textSize="18sp" />
+        android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/order_date_tv"
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:background="@color/basic"
+            android:layout_marginStart="5dp"
+            android:src="@drawable/pin"/>
+
+
+        <TextView
+            android:id="@+id/customer_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="16dp"
+            android:textStyle="bold"
+            android:text="55 hemo st , Giza "
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:layout_marginStart="16dp"
-        android:text="16/2/2021"
-        android:textStyle="bold"
-        android:textSize="18sp"
-        android:textColor="@color/white"
-        app:layout_constraintTop_toBottomOf="@+id/order_time_tv"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <TextView
-        android:id="@+id/order_time_tv"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginStart="16dp"
         android:layout_marginBottom="16dp"
-        android:text="4:45 PM"
-        android:textStyle="bold"
-        android:textSize="18sp"
-        android:textColor="@color/white"
-         />
+        android:orientation="horizontal">
+
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:background="@color/basic"
+            android:layout_marginStart="5dp"
+            android:src="@drawable/clock"/>
+
+
+        <TextView
+            android:id="@+id/order_date_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="16dp"
+            android:text="16/2/2021"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/order_time_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_gravity="center_vertical"
+            android:text="4:45 PM"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:textColor="@color/white" />
+
+    </LinearLayout>
+
 
 </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.util.Base64;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,8 +21,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.ammar.pharmacy.MainActivity;
 import com.ammar.pharmacy.R;
+import com.ammar.pharmacy.acceptedorders.OrderDetailsReturn;
+import com.ammar.pharmacy.retrofit.APIHelper;
 
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+import static com.ammar.pharmacy.retrofit.APIHelper.api;
 
 public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryHolder> {
 
@@ -54,13 +63,21 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryH
                TextView customer_name=dialog.findViewById(R.id.customer_name);
                TextView customer_phone=dialog.findViewById(R.id.customer_phone);
                TextView customer_address=dialog.findViewById(R.id.customer_address);
+               TextView order_date= dialog.findViewById(R.id.order_date_tv);
+               TextView order_time=dialog.findViewById(R.id.order_time_tv);
+
 
                PrescriptionDetails_tv.setText(pharmacyOrders.get(historyHolder.getAdapterPosition()).orderByTexting);
-               customer_name.setText(pharmacyOrders.get(historyHolder.getAdapterPosition()).customerID);
-               customer_phone.setText(pharmacyOrders.get(historyHolder.getAdapterPosition()).date);
+               customer_name.setText("Amr");
+               customer_phone.setText("01115456789");
+               String date = pharmacyOrders.get(historyHolder.getAdapterPosition()).date.substring(0,10);
+               String time = pharmacyOrders.get(historyHolder.getAdapterPosition()).date.substring(11,19);
+               order_date.setText(date);
+               order_time.setText(time);
 
-               Toast.makeText(context,"test click "+String.valueOf(historyHolder.getAdapterPosition())
-                       ,Toast.LENGTH_SHORT).show();
+
+//               Toast.makeText(context,"test click "+String.valueOf(historyHolder.getAdapterPosition())
+//                       ,Toast.LENGTH_SHORT).show();
                dialog.show();
                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
            }
@@ -110,6 +127,59 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryH
 
     }
 
+    /*public void orderInfo(String orderId){
+        new APIHelper();
+        api.orderInfo(orderId).enqueue(new Callback<OrderDetailsReturn>() {
+            @Override
+            public void onResponse(Call<OrderDetailsReturn> call, Response<OrderDetailsReturn> response) {
+                OrderDetailsReturn body= response.body();
+                String message= body.toString();
+                Log.d(TAG," order info is  "+message);
+                if (body.getOrder() != null){
+                    Log.d(TAG,body.toString());
+                    String orderId =body.getOrder().get_id();
+                    Log.d(TAG,"onResponse: order id"+orderId);
+                    String date = body.getOrder().getDate().substring(0,10);
+                    String time = body.getOrder().getDate().substring(11,19);
+                    .setText(time);
+                    order_date_tv.setText(date);
+                    if (body.getOrder().getOrderByTexting() !=null)
+                        PrescriptionDetails_tv.setText(body.getOrder().getOrderByTexting());
+                    else {PrescriptionDetails_tv.setVisibility(View.INVISIBLE);}
+                    if(body.getOrder().getOrderByPhoto() != null) {
+                        byte[] decodedString= Base64.decode(String.valueOf(body.getOrder().getOrderByPhoto()), Base64.DEFAULT);
+                        Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+                        PrescriptionDetails_imageView.setImageBitmap((decodedByte));
+                        PrescriptionDetails_imageView.setVisibility(View.VISIBLE);
+                    }else {PrescriptionDetails_imageView.setVisibility(View.GONE);}
+
+                    customer_name.setText(body.getCustomersData().getName());
+                    customer_phone.setText(body.getCustomersData().getPhone());
+                    customer_address.setText(body.getCustomersData().getLocationAsAddress());
+
+                } else {
+                    //toast message
+                    Log.d(TAG,"message: No found orders");
+                    tv.setText("No Current Orders Yet");
+                    no_order.setVisibility(View.VISIBLE);
+                    order_time_tv.setVisibility(View.GONE);
+                    order_date_tv.setVisibility(View.GONE);
+                    PrescriptionDetails_tv.setVisibility(View.GONE);
+                    PrescriptionDetails_imageView.setVisibility(View.GONE);
+                    PrescriptionDetails.setVisibility(View.GONE);
+                    customer_name.setVisibility(View.GONE);
+                    customer_phone.setVisibility(View.GONE);
+                    customer_address.setVisibility(View.GONE);
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<OrderDetailsReturn> call, Throwable t) {
+
+            }
+        });
+    }*/
 //    public interface onOrderListener {
 //        public void onClickItem(int position);
 //    }
