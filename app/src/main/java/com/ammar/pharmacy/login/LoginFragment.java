@@ -118,7 +118,6 @@ LoginFragment extends Fragment {
                     getActivity().findViewById(R.id.bottomNavigationView).setVisibility(View.VISIBLE);
                 //  bottomNavigationView.setVisibility(View.VISIBLE);
                     loadFragment(new CurrentOrdersFragment());
-
                 }else {
                     error.setText(response.body().getMessage());
                     error.setVisibility(View.VISIBLE);

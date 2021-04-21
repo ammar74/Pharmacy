@@ -7,6 +7,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -35,7 +36,7 @@ import static com.ammar.pharmacy.login.LoginFragment.token_key;
 import static com.ammar.pharmacy.retrofit.APIHelper.api;
 
 
-public class OrdersHistoryFragment extends Fragment {
+public class OrdersHistoryFragment extends Fragment  {
     TextView tv;
     ImageView no_history;
     RecyclerView rv;
@@ -87,7 +88,7 @@ public class OrdersHistoryFragment extends Fragment {
                 Log.d(TAG,"ordersHistory message is "+response.body().message+
                         "    the orders is "+response.body().pharmacyOrders);
                 if (orderHistoryResponse.pharmacyOrders!=null){
-                    HistoryAdapter adapter=new HistoryAdapter(orderHistoryResponse.pharmacyOrders);
+                    HistoryAdapter adapter=new HistoryAdapter(orderHistoryResponse.pharmacyOrders, getContext());
                     rv.setAdapter(adapter);
                 }else {
                     orders=null;
@@ -105,4 +106,14 @@ public class OrdersHistoryFragment extends Fragment {
         });
 
     }
+
+
+    public void loadFragment(Fragment fragment) {
+        // load fragment
+        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.frameContainer, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
 }
