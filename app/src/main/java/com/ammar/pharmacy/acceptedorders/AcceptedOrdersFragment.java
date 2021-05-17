@@ -36,7 +36,6 @@ import static com.ammar.pharmacy.retrofit.APIHelper.api;
 
 
 public class AcceptedOrdersFragment extends Fragment {
-
     TextView tv;
     ImageView no_accepted_orders_IV;
     RecyclerView rv;
@@ -44,7 +43,6 @@ public class AcceptedOrdersFragment extends Fragment {
     ProgressBar progressBar;
     List<OrderDetailsReturn> pharmacyOrders;
     public static final String TAG="AcceptedOrdersFragment";
-
 
     public AcceptedOrdersFragment() {
         // Required empty public constructor

@@ -1,7 +1,13 @@
 package com.ammar.pharmacy.register;
 
+import android.Manifest;
+import android.content.Context;
+import android.content.pm.PackageManager;
+import android.location.LocationManager;
+import android.location.LocationProvider;
 import android.os.Bundle;
 
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -40,6 +46,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
     ImageButton PH_placeholder;
     LinearLayout locationLinear;
     Button pharmacyRegisterBTN2;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -83,6 +90,14 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
         switch (v.getId()) {
 
             case R.id.PH_placeholder:
+         /*       if(ContextCompat.checkSelfPermission(getContext(),
+                        Manifest.permission.ACCESS_FINE_LOCATION)
+                        == PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(getContext(),
+                        Manifest.permission.ACCESS_COARSE_LOCATION)
+                        == PackageManager.PERMISSION_GRANTED){
+                    
+                    getCurrentLocation();
+                }*/
                 break;
 
             case R.id.pharmacyRegisterBTN2:
@@ -91,6 +106,16 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
         }
 
     }
+
+  /*  private void getCurrentLocation() {
+        LocationManager locationManager=(LocationManager) getActivity()
+                .getSystemService(Context.LOCATION_SERVICE);
+
+        if(locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)||
+                locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)){
+
+        }
+    }*/
 
     public void register(RegisterObject registerObject) {
         new APIHelper();

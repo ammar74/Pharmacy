@@ -49,7 +49,7 @@ public class MoreFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         more_rv=view.findViewById(R.id.more_rv);
-        moreInfoList.add(new MoreInfoItem(R.drawable.ic_baseline_settings_24,"Settings"));
+        moreInfoList.add(new MoreInfoItem(R.drawable.ic_baseline_settings_24,"General Settings"));
         moreInfoList.add(new MoreInfoItem(R.drawable.ic_baseline_contact_page_24,"About Us"));
         moreInfoList.add(new MoreInfoItem(R.drawable.ic_baseline_exit_to_app_24,"LogOut"));
 
@@ -61,9 +61,10 @@ public class MoreFragment extends Fragment {
             @Override
             public void onClickItem(int position) {
                 MoreInfoItem moreInfoItem = moreInfoList.get(position);
-                if (moreInfoItem.name.equals("Settings")) {
+                if (moreInfoItem.name.equals("General Settings")) {
                     Log.d(TAG,"Coming Soon..");
-                    Toast.makeText(getContext(), "Coming Soon..", Toast.LENGTH_LONG).show();
+                    //Toast.makeText(getContext(), "Coming Soon..", Toast.LENGTH_LONG).show();
+                    loadFragment(new EditFragment());
 
                 } else if (moreInfoItem.name.equals("About Us")) {
                     loadFragment(new AboutUsFragment());

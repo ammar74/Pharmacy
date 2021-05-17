@@ -9,6 +9,7 @@ import com.ammar.pharmacy.currentorder.GetOrdersReturnBody;
 import com.ammar.pharmacy.currentorder.IdWrapper;
 import com.ammar.pharmacy.login.LoginObject;
 import com.ammar.pharmacy.login.LoginReturnBody;
+import com.ammar.pharmacy.ordershistory.OrderDetailsResponse;
 import com.ammar.pharmacy.ordershistory.OrderHistoryResponse;
 import com.ammar.pharmacy.ordershistory.PharmacyOrders;
 import com.ammar.pharmacy.register.RegisterObject;
@@ -19,6 +20,7 @@ import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 
 public interface NetworkAPI {
     @POST("pharmacySignin")
@@ -30,8 +32,8 @@ public interface NetworkAPI {
     @GET("getOrders")
     Call<GetOrdersReturnBody> getOrders(@Header("token")String token );
 
-    @POST("currentOrderPharmacy")
-    Call<OrderDetailsReturn> orderInfo(@Body String orderId);
+    @POST("currentOrderPharmacy/{orderId}")
+    Call<OrderDetailsResponse> orderInfo(@Path("orderId") String orderId);
 
     @GET("pharmacyCurrentOrders")
     Call<AcceptedOrdersReturn> acceptedOrders(@Header("token")String token);

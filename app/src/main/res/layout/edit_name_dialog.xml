@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:text="Edit Name"
+        android:textColor="@color/basic"
+        android:layout_gravity="center"
+        android:textSize="34dp"
+        android:fontFamily="@font/bangers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <EditText
+        android:id="@+id/newNameET"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Enter the new name"
+        android:layout_marginStart="10dp"
+        android:fontFamily="@font/bangers"
+        android:textSize="24dp"/>
+
+    <Button
+        android:id="@+id/saveNewNameBTN"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="150dp"
+        android:text="save"
+        android:fontFamily="@font/bangers"
+        android:textSize="24dp"/>
+
+</LinearLayout>

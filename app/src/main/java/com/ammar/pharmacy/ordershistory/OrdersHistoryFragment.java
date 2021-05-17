@@ -77,9 +77,9 @@ public class OrdersHistoryFragment extends Fragment  {
     public void  pharmacyOrderHistory(String token) {
         new APIHelper();
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
-        builder.connectTimeout(5, TimeUnit.MINUTES) // connect timeout
-                .writeTimeout(5, TimeUnit.MINUTES) // write timeout
-                .readTimeout(5, TimeUnit.MINUTES); // read timeout
+        builder.connectTimeout(10, TimeUnit.MINUTES) // connect timeout
+                .writeTimeout(10, TimeUnit.MINUTES) // write timeout
+                .readTimeout(10, TimeUnit.MINUTES); // read timeout
         OkHttpClient okHttpClient = builder.build();
         api.pharmacyOrderHistory(token).enqueue(new Callback<OrderHistoryResponse>() {
             @Override

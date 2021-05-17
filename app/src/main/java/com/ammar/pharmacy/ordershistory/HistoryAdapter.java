@@ -56,32 +56,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryH
         dialog=new Dialog(context);
         dialog.setContentView(R.layout.dialog_order);
 
-       historyHolder.order_item_id.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View v) {
-               TextView PrescriptionDetails_tv= dialog.findViewById(R.id.PrescriptionDetails_tv);
-               TextView customer_name=dialog.findViewById(R.id.customer_name);
-               TextView customer_phone=dialog.findViewById(R.id.customer_phone);
-               TextView customer_address=dialog.findViewById(R.id.customer_address);
-               TextView order_date= dialog.findViewById(R.id.order_date_tv);
-               TextView order_time=dialog.findViewById(R.id.order_time_tv);
 
-
-               PrescriptionDetails_tv.setText(pharmacyOrders.get(historyHolder.getAdapterPosition()).orderByTexting);
-               customer_name.setText("Amr");
-               customer_phone.setText("01115456789");
-               String date = pharmacyOrders.get(historyHolder.getAdapterPosition()).date.substring(0,10);
-               String time = pharmacyOrders.get(historyHolder.getAdapterPosition()).date.substring(11,19);
-               order_date.setText(date);
-               order_time.setText(time);
-
-
-//               Toast.makeText(context,"test click "+String.valueOf(historyHolder.getAdapterPosition())
-//                       ,Toast.LENGTH_SHORT).show();
-               dialog.show();
-               dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-           }
-       });
         return historyHolder;
     }
 
@@ -92,17 +67,38 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryH
         String time = pharmacyOrdersItem.getDate().substring(11,19);
         holder.date_tv.setText(date);
         holder.time_tv.setText(time);
-        if (pharmacyOrdersItem.orderByTexting !=null) {
-            holder.medicine_tv.setText(pharmacyOrdersItem.getOrderByTexting());
-        }
-        else {
-            byte[] decodedString= Base64.decode(String.valueOf(pharmacyOrdersItem.orderByPhoto), Base64.DEFAULT);
-            Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-            holder.medicine_IV.setImageBitmap((decodedByte));
-            holder.medicine_IV.setVisibility(View.VISIBLE);
-            holder.medicine_tv.setVisibility(View.GONE);
-        }
+        if(pharmacyOrdersItem.orderByTexting!=null)
+        {holder.medicine_tv.setText(pharmacyOrdersItem.getOrderByTexting());}
         holder.order_status_tv.setText(pharmacyOrdersItem.getGlobalStatus());
+
+        holder.order_item_id.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TextView PrescriptionDetails_tv= dialog.findViewById(R.id.PrescriptionDetails_tv);
+                TextView customer_name=dialog.findViewById(R.id.customer_name);
+                TextView customer_phone=dialog.findViewById(R.id.customer_phone);
+                TextView customer_address=dialog.findViewById(R.id.customer_address);
+                TextView order_date= dialog.findViewById(R.id.order_date_tv);
+                TextView order_time=dialog.findViewById(R.id.order_time_tv);
+//                ImageView  medicine_IV=dialog.findViewById(R.id.medicine_IV);
+
+
+                PrescriptionDetails_tv.setText(pharmacyOrdersItem.orderByTexting);
+                customer_name.setText("Amr");
+                customer_phone.setText("01115456789");
+                String date = pharmacyOrders.get(holder.getAdapterPosition()).date.substring(0,10);
+                String time = pharmacyOrders.get(holder.getAdapterPosition()).date.substring(11,19);
+                order_date.setText(date);
+                order_time.setText(time);
+             //   orderInfo(pharmacyOrdersItem._id);
+
+
+//               Toast.makeText(context,"test click "+String.valueOf(pharmacyOrdersItem)
+//                       ,Toast.LENGTH_SHORT).show();
+                dialog.show();
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            }
+        });
     }
 
     @Override
@@ -127,59 +123,59 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryH
 
     }
 
-    /*public void orderInfo(String orderId){
+    public void orderInfo(String orderId){
         new APIHelper();
-        api.orderInfo(orderId).enqueue(new Callback<OrderDetailsReturn>() {
+        api.orderInfo(orderId).enqueue(new Callback<OrderDetailsResponse>() {
             @Override
-            public void onResponse(Call<OrderDetailsReturn> call, Response<OrderDetailsReturn> response) {
-                OrderDetailsReturn body= response.body();
-                String message= body.toString();
-                Log.d(TAG," order info is  "+message);
-                if (body.getOrder() != null){
-                    Log.d(TAG,body.toString());
-                    String orderId =body.getOrder().get_id();
-                    Log.d(TAG,"onResponse: order id"+orderId);
-                    String date = body.getOrder().getDate().substring(0,10);
-                    String time = body.getOrder().getDate().substring(11,19);
-                    .setText(time);
-                    order_date_tv.setText(date);
-                    if (body.getOrder().getOrderByTexting() !=null)
-                        PrescriptionDetails_tv.setText(body.getOrder().getOrderByTexting());
-                    else {PrescriptionDetails_tv.setVisibility(View.INVISIBLE);}
-                    if(body.getOrder().getOrderByPhoto() != null) {
-                        byte[] decodedString= Base64.decode(String.valueOf(body.getOrder().getOrderByPhoto()), Base64.DEFAULT);
-                        Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-                        PrescriptionDetails_imageView.setImageBitmap((decodedByte));
-                        PrescriptionDetails_imageView.setVisibility(View.VISIBLE);
-                    }else {PrescriptionDetails_imageView.setVisibility(View.GONE);}
+            public void onResponse(Call<OrderDetailsResponse> call, Response<OrderDetailsResponse> response) {
+                OrderDetailsResponse body= response.body();
+  //              String message= body.toString();
+                Log.d(TAG," order info is  "+body);
+//                if (body.getOrder() != null){
+//                    Log.d(TAG,body.toString());
+//                    String orderId =body.getOrder().get_id();
+//                    Log.d(TAG,"onResponse: order id"+orderId);
+//                    String date = body.getOrder().getDate().substring(0,10);
+//                    String time = body.getOrder().getDate().substring(11,19);
+//                    .setText(time);
+//                    order_date_tv.setText(date);
+//                    if (body.getOrder().getOrderByTexting() !=null)
+//                        PrescriptionDetails_tv.setText(body.getOrder().getOrderByTexting());
+//                    else {PrescriptionDetails_tv.setVisibility(View.INVISIBLE);}
+//                    if(body.getOrder().getOrderByPhoto() != null) {
+//                        byte[] decodedString= Base64.decode(String.valueOf(body.getOrder().getOrderByPhoto()), Base64.DEFAULT);
+//                        Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+//                        PrescriptionDetails_imageView.setImageBitmap((decodedByte));
+//                        PrescriptionDetails_imageView.setVisibility(View.VISIBLE);
+//                    }else {PrescriptionDetails_imageView.setVisibility(View.GONE);}
+//
+//                    customer_name.setText(body.getCustomersData().getName());
+//                    customer_phone.setText(body.getCustomersData().getPhone());
+//                    customer_address.setText(body.getCustomersData().getLocationAsAddress());
 
-                    customer_name.setText(body.getCustomersData().getName());
-                    customer_phone.setText(body.getCustomersData().getPhone());
-                    customer_address.setText(body.getCustomersData().getLocationAsAddress());
-
-                } else {
+  //              } else {
                     //toast message
-                    Log.d(TAG,"message: No found orders");
-                    tv.setText("No Current Orders Yet");
-                    no_order.setVisibility(View.VISIBLE);
-                    order_time_tv.setVisibility(View.GONE);
-                    order_date_tv.setVisibility(View.GONE);
-                    PrescriptionDetails_tv.setVisibility(View.GONE);
-                    PrescriptionDetails_imageView.setVisibility(View.GONE);
-                    PrescriptionDetails.setVisibility(View.GONE);
-                    customer_name.setVisibility(View.GONE);
-                    customer_phone.setVisibility(View.GONE);
-                    customer_address.setVisibility(View.GONE);
-                }
+//                    Log.d(TAG,"message: No found orders");
+//                    tv.setText("No Current Orders Yet");
+//                    no_order.setVisibility(View.VISIBLE);
+//                    order_time_tv.setVisibility(View.GONE);
+//                    order_date_tv.setVisibility(View.GONE);
+//                    PrescriptionDetails_tv.setVisibility(View.GONE);
+//                    PrescriptionDetails_imageView.setVisibility(View.GONE);
+//                    PrescriptionDetails.setVisibility(View.GONE);
+//                    customer_name.setVisibility(View.GONE);
+//                    customer_phone.setVisibility(View.GONE);
+//                    customer_address.setVisibility(View.GONE);
+             //   }
 
             }
 
             @Override
-            public void onFailure(Call<OrderDetailsReturn> call, Throwable t) {
+            public void onFailure(Call<OrderDetailsResponse> call, Throwable t) {
 
             }
         });
-    }*/
+    }
 //    public interface onOrderListener {
 //        public void onClickItem(int position);
 //    }

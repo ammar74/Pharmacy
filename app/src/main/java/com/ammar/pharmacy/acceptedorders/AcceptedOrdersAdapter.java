@@ -1,3 +1,4 @@
+
 package com.ammar.pharmacy.acceptedorders;
 
 import android.content.Context;
@@ -129,7 +130,7 @@ public class AcceptedOrdersAdapter extends RecyclerView.Adapter<AcceptedOrdersAd
             public void onResponse(@Nullable Call<DoneOrderResponse> call, Response<DoneOrderResponse> response) {
                 DoneOrderResponse doneOrderResponse=response.body();
                 Log.d(TAG,"Done Order Success is "+doneOrderResponse);
-                Toast.makeText(context,doneOrderResponse.getMessage(),Toast.LENGTH_LONG).show();
+//                Toast.makeText(context,doneOrderResponse.getMessage(),Toast.LENGTH_LONG).show();
             }
 
             @Override
