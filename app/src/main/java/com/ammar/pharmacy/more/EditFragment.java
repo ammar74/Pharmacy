@@ -1,6 +1,9 @@
 package com.ammar.pharmacy.more;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -18,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ammar.pharmacy.R;
+import com.ammar.pharmacy.register.RegisterObject;
 
 public class EditFragment extends Fragment implements View.OnClickListener {
 
@@ -73,10 +77,10 @@ public class EditFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.editName:
-                AlertDialog.Builder builder=new AlertDialog.Builder(getContext());
-                View mView=getLayoutInflater().inflate(R.layout.edit_name_dialog,null);
-                final EditText newNameET=mView.findViewById(R.id.newNameET);
-                final Button saveNewNameBTN=mView.findViewById(R.id.saveNewNameBTN);
+                Dialog name_dialog=new Dialog(getContext());
+                name_dialog.setContentView(R.layout.edit_name_dialog);
+                final EditText newNameET=name_dialog.findViewById(R.id.newNameET);
+                final Button saveNewNameBTN=name_dialog.findViewById(R.id.saveNewNameBTN);
                 saveNewNameBTN.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -85,20 +89,68 @@ public class EditFragment extends Fragment implements View.OnClickListener {
                         }else  Toast.makeText(getContext(),"please Enter Your New Name",Toast.LENGTH_LONG);
                     }
                 });
-                builder.setView(mView);
-                AlertDialog dialog=builder.create();
-                dialog.show();
-
+                name_dialog.show();
+                name_dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 break;
             case R.id.editPhone:
+                Dialog phone_dialog=new Dialog(getContext());
+                phone_dialog.setContentView(R.layout.edit_phone_dialog);
+                final EditText newPhoneET=phone_dialog.findViewById(R.id.newPhoneET);
+                final Button saveNewPhoneBTN=phone_dialog.findViewById(R.id.saveNewPhoneBTN);
+                saveNewPhoneBTN.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (!newPhoneET.getText().toString().isEmpty()){
+
+                        }else  Toast.makeText(getContext(),"please Enter Your New Phone",Toast.LENGTH_LONG);
+
+                    }
+                });
+                phone_dialog.show();
+                phone_dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
                 break;
             case R.id.editPassword:
+                Dialog password_dialog=new Dialog(getContext());
+                password_dialog.setContentView(R.layout.edit_password_dialog);
+                final EditText oldPasswordET=password_dialog.findViewById(R.id.oldPasswordET);
+                final EditText newPasswordET=password_dialog.findViewById(R.id.newPasswordET);
+                final EditText confirmNewPasswordET=password_dialog.findViewById(R.id.confirmNewPasswordET);
+                final Button saveNewPasswordBTN=password_dialog.findViewById(R.id.saveNewPasswordBTN);
+                saveNewPasswordBTN.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (!oldPasswordET.getText().toString().isEmpty()||
+                                !newPasswordET.getText().toString().isEmpty()||
+                                !confirmNewPasswordET.getText().toString().isEmpty()){
 
+                        }else  Toast.makeText(getContext(),"please Fill all the fields correctly"
+                                ,Toast.LENGTH_LONG);
+
+                    }
+                });
+                password_dialog.show();
+                password_dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 break;
+
             case R.id.editAddress:
+                Dialog address_dialog=new Dialog(getContext());
+                address_dialog.setContentView(R.layout.edit_address_dialog);
+                final EditText newAddressET=address_dialog.findViewById(R.id.newAddressET);
+                final Button saveNewAddressBTN=address_dialog.findViewById(R.id.saveNewAddressBTN);
+                saveNewAddressBTN.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (!newAddressET.getText().toString().isEmpty()){
 
+                        }else  Toast.makeText(getContext(),"please Enter Your New Phone",Toast.LENGTH_LONG);
+
+                    }
+                });
+                address_dialog.show();
+                address_dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 break;
+
             case R.id.editLocation:
 
                 break;

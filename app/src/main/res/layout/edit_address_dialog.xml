@@ -1,6 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <TextView
+        android:text="Edit Address"
+        android:textColor="@color/basic"
+        android:layout_gravity="center"
+        android:textSize="34dp"
+        android:fontFamily="@font/bangers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <EditText
+        android:id="@+id/newAddressET"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Enter the new Address"
+        android:layout_marginHorizontal="10dp"
+        android:textColor="#A39F9F"
+        android:textSize="24dp"/>
+
+    <Button
+        android:id="@+id/saveNewAddressBTN"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="150dp"
+        android:text="save"
+        android:fontFamily="@font/bangers"
+        android:textSize="24dp"/>
+
+
+</LinearLayout>

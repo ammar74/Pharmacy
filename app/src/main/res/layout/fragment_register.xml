@@ -71,42 +71,11 @@
         android:text="Pharmacy Address"
         android:textColor="#6C6B6E"/>
 
-    <LinearLayout
-        android:id="@+id/locationLinear"
-        android:weightSum="4"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        app:layout_constraintTop_toBottomOf="@id/pharmacyAddressET"
-        android:orientation="horizontal">
-
-        <EditText
-            android:id="@+id/pharmacyLocationET"
-            android:layout_weight="1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/pharmacyPhonesET"
-            android:layout_margin="20dp"
-            android:text="Pharmacy location"
-            android:textColor="#6C6B6E"/>
-
-        <ImageButton
-            android:id="@+id/PH_placeholder"
-            android:layout_width="match_parent"
-            android:layout_height="58dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_weight="3"
-            android:src="@drawable/placeholder"
-            android:background="@color/white"/>
-
-    </LinearLayout>
-
     <TextView
         android:id="@+id/password_info"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/locationLinear"
+        app:layout_constraintTop_toBottomOf="@id/pharmacyAddressET"
         android:text="Password"
         android:layout_marginTop="20dp"
         android:layout_marginLeft="10dp"
@@ -133,16 +102,28 @@
         android:textColor="#6C6B6E"/>
 
     <Button
+        android:id="@+id/getLocationBTN"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/basic"
+        app:layout_constraintTop_toBottomOf="@id/confirm_PH_passwordET"
+        android:layout_marginHorizontal="60dp"
+        android:layout_marginTop="15dp"
+        android:text="Get My Location"/>
+
+
+    <Button
         android:id="@+id/pharmacyRegisterBTN2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/confirm_PH_passwordET"
+        app:layout_constraintTop_toBottomOf="@id/getLocationBTN"
         android:text="Register"
         android:textStyle="bold"
         android:textSize="20dp"
         android:layout_marginVertical="40dp"
         android:layout_marginHorizontal="20dp"
         android:background="@drawable/button_background"/>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

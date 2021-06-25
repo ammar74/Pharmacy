@@ -9,6 +9,8 @@ import com.ammar.pharmacy.currentorder.GetOrdersReturnBody;
 import com.ammar.pharmacy.currentorder.IdWrapper;
 import com.ammar.pharmacy.login.LoginObject;
 import com.ammar.pharmacy.login.LoginReturnBody;
+import com.ammar.pharmacy.more.EditNameObject;
+import com.ammar.pharmacy.more.EditPasswordObject;
 import com.ammar.pharmacy.ordershistory.OrderDetailsResponse;
 import com.ammar.pharmacy.ordershistory.OrderHistoryResponse;
 import com.ammar.pharmacy.ordershistory.PharmacyOrders;
@@ -38,7 +40,6 @@ public interface NetworkAPI {
     @GET("pharmacyCurrentOrders")
     Call<AcceptedOrdersReturn> acceptedOrders(@Header("token")String token);
 
-
     @GET("pharmacyOrderHistory")
     Call<OrderHistoryResponse> pharmacyOrderHistory(@Header("token")String token);
 
@@ -50,6 +51,18 @@ public interface NetworkAPI {
 
     @POST("doneorder")
     Call<DoneOrderResponse> doneOrder(@Header("token")String token,@Body StatusIDWrapper orderId);
+
+    @POST("editPharmacyName")
+    Call<PharmacyRespond> editName(@Body EditNameObject editNameObject);
+
+    @POST("editPharmacyPass")
+    Call<PharmacyRespond> editPassword (@Body EditPasswordObject editPasswordObject);
+
+
+    @POST("editPharmacyPhones")
+    Call<PharmacyRespond> editPhone (@Body EditPasswordObject editPasswordObject);
+
+
 
 
 

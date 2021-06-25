@@ -11,8 +11,6 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -26,7 +24,6 @@ import com.ammar.pharmacy.currentorder.CurrentOrdersFragment;
 import com.ammar.pharmacy.R;
 import com.ammar.pharmacy.register.RegisterFragment;
 import com.ammar.pharmacy.retrofit.APIHelper;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -134,8 +131,7 @@ public class LoginFragment extends Fragment {
     }
     public void loadFragment(Fragment fragment) {
         // load fragment
-        assert getFragmentManager() != null;
-        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.frameContainer, fragment);
         transaction.addToBackStack(null);
         transaction.commit();
