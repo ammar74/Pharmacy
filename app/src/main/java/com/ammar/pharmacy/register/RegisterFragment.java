@@ -59,6 +59,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
 
     Button pharmacyRegisterBTN2,getLocationBTN;
     Coordinates coordinates=null;
+
     FusedLocationProviderClient fusedLocationClient;
 
 
@@ -111,7 +112,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
                             pharmacyEmailET.getText().toString(),
                             PH_passwordET.getText().toString(),
                             confirm_PH_passwordET.getText().toString(),
-                            pharmacyPhonesET.getText().toString(),
+                            new String[]{pharmacyPhonesET.getText().toString()},
                             pharmacyAddressET.getText().toString(),
                             new LocationAsCoordinates(coordinates));
                 }
