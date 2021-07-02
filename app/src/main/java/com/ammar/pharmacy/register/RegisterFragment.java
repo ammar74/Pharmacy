@@ -98,6 +98,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
         switch (v.getId()) {
 
             case R.id.getLocationBTN:
+                setupLocationClient();
                 getCurrentLocation();
                 break;
 
