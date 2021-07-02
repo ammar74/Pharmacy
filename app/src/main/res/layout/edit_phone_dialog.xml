@@ -18,18 +18,9 @@
         android:id="@+id/newPhoneET"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Enter the new Phone"
+        android:hint="Enter the new Phone"
         android:layout_marginHorizontal="10dp"
         android:textColor="#A39F9F"
-        android:textSize="24dp"/>
-
-    <Button
-        android:id="@+id/saveNewPhoneBTN"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="150dp"
-        android:text="save"
-        android:fontFamily="@font/bangers"
         android:textSize="24dp"/>
 
 

@@ -18,18 +18,10 @@
         android:id="@+id/newNameET"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Enter the new name"
+        android:hint="Enter the new name"
         android:layout_marginHorizontal="10dp"
         android:textColor="#A39F9F"
         android:textSize="24dp"/>
 
-    <Button
-        android:id="@+id/saveNewNameBTN"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="150dp"
-        android:text="save"
-        android:fontFamily="@font/bangers"
-        android:textSize="24dp"/>
 
 </LinearLayout>

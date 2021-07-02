@@ -9,8 +9,12 @@ import com.ammar.pharmacy.currentorder.GetOrdersReturnBody;
 import com.ammar.pharmacy.currentorder.IdWrapper;
 import com.ammar.pharmacy.login.LoginObject;
 import com.ammar.pharmacy.login.LoginReturnBody;
+import com.ammar.pharmacy.more.EditAddressObject;
+import com.ammar.pharmacy.more.EditCoordinatesObject;
 import com.ammar.pharmacy.more.EditNameObject;
 import com.ammar.pharmacy.more.EditPasswordObject;
+import com.ammar.pharmacy.more.EditPhonesObject;
+import com.ammar.pharmacy.more.EditPhotoObject;
 import com.ammar.pharmacy.ordershistory.OrderDetailsResponse;
 import com.ammar.pharmacy.ordershistory.OrderHistoryResponse;
 import com.ammar.pharmacy.ordershistory.PharmacyOrders;
@@ -52,15 +56,32 @@ public interface NetworkAPI {
     @POST("doneorder")
     Call<DoneOrderResponse> doneOrder(@Header("token")String token,@Body StatusIDWrapper orderId);
 
+
+    //Edit
     @POST("editPharmacyName")
-    Call<PharmacyRespond> editName(@Body EditNameObject editNameObject);
+    Call<PharmacyRespond> editName(@Header("token")String token,
+                                   @Body EditNameObject editNameObject);
 
     @POST("editPharmacyPass")
-    Call<PharmacyRespond> editPassword (@Body EditPasswordObject editPasswordObject);
-
+    Call<PharmacyRespond> editPassword(@Header("token")String token,
+                                       @Body EditPasswordObject editPasswordObject);
 
     @POST("editPharmacyPhones")
-    Call<PharmacyRespond> editPhone (@Body EditPasswordObject editPasswordObject);
+    Call<PharmacyRespond> editPhone (@Header("token")String token,
+                                     @Body EditPhonesObject editPhonesObject);
+
+    @POST("editPharmacyAddress")
+    Call<PharmacyRespond> editAddress(@Header("token")String token,
+                                      @Body EditAddressObject editAddressObject);
+
+    @POST("editPharmacyLogo")
+    Call<PharmacyRespond> editLogo(@Header("token")String token,
+                                   @Body EditPhotoObject editPhotoObject);
+
+    @POST("editPharmacyCoordinates")
+    Call<PharmacyRespond> editCoordinates(@Header("token")String token,
+                                          @Body EditCoordinatesObject editCoordinatesObject);
+
 
 
 

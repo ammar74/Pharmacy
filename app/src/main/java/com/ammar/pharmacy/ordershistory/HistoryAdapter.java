@@ -80,7 +80,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryH
                 TextView customer_address=dialog.findViewById(R.id.customer_address);
                 TextView order_date= dialog.findViewById(R.id.order_date_tv);
                 TextView order_time=dialog.findViewById(R.id.order_time_tv);
-//                ImageView  medicine_IV=dialog.findViewById(R.id.medicine_IV);
+//              ImageView  medicine_IV=dialog.findViewById(R.id.medicine_IV);
 
 
                 PrescriptionDetails_tv.setText(pharmacyOrdersItem.orderByTexting);
@@ -90,9 +90,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryH
                 String time = pharmacyOrders.get(holder.getAdapterPosition()).date.substring(11,19);
                 order_date.setText(date);
                 order_time.setText(time);
-             //   orderInfo(pharmacyOrdersItem._id);
-
-
+             //orderInfo(pharmacyOrdersItem._id);
 //               Toast.makeText(context,"test click "+String.valueOf(pharmacyOrdersItem)
 //                       ,Toast.LENGTH_SHORT).show();
                 dialog.show();

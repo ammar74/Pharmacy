@@ -14,10 +14,11 @@
         <entry key="..\:/Users/ammar/AndroidStudioProjects/Pharmacy/app/src/main/res/layout/edit_phone_dialog.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/ammar/AndroidStudioProjects/Pharmacy/app/src/main/res/layout/fragment_accepted_orders.xml" value="0.1852355072463768" />
         <entry key="..\:/Users/ammar/AndroidStudioProjects/Pharmacy/app/src/main/res/layout/fragment_current_order.xml" value="0.1852355072463768" />
-        <entry key="..\:/Users/ammar/AndroidStudioProjects/Pharmacy/app/src/main/res/layout/fragment_edit.xml" value="0.22" />
+        <entry key="..\:/Users/ammar/AndroidStudioProjects/Pharmacy/app/src/main/res/layout/fragment_edit.xml" value="0.25" />
+        <entry key="..\:/Users/ammar/AndroidStudioProjects/Pharmacy/app/src/main/res/layout/fragment_login.xml" value="0.1" />
         <entry key="..\:/Users/ammar/AndroidStudioProjects/Pharmacy/app/src/main/res/layout/fragment_more.xml" value="0.16666666666666666" />
         <entry key="..\:/Users/ammar/AndroidStudioProjects/Pharmacy/app/src/main/res/layout/fragment_order_info.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/ammar/AndroidStudioProjects/Pharmacy/app/src/main/res/layout/fragment_register.xml" value="0.33" />
+        <entry key="..\:/Users/ammar/AndroidStudioProjects/Pharmacy/app/src/main/res/layout/fragment_register.xml" value="0.25" />
       </map>
     </option>
   </component>
