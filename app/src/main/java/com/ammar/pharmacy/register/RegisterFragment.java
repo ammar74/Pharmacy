@@ -189,6 +189,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
                     if (location != null) {
                         // 4
                         coordinates = new Coordinates(location.getLatitude(), location.getLongitude());
+                        Log.d(TAG,"coordinates"+coordinates);
                         Toast.makeText(getContext(), "location has been picked", Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(getContext(), "Can't get your location,check that gps is enabled"

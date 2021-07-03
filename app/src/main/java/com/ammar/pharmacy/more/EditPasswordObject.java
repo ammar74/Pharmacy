@@ -5,6 +5,12 @@ public class EditPasswordObject {
     private String Password;
     private String confirmPassword;
 
+    public EditPasswordObject(String oldPassword, String password, String confirmPassword) {
+        this.oldPassword = oldPassword;
+        Password = password;
+        this.confirmPassword = confirmPassword;
+    }
+
     public String getOldPassword() {
         return oldPassword;
     }

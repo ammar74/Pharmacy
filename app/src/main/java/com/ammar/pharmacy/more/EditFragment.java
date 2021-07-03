@@ -23,6 +23,8 @@ import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -35,7 +37,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ammar.pharmacy.R;
+import com.ammar.pharmacy.currentorder.IdWrapper;
+import com.ammar.pharmacy.currentorder.PharmacyRespond;
 import com.ammar.pharmacy.register.Coordinates;
+import com.ammar.pharmacy.retrofit.APIHelper;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
@@ -48,11 +53,19 @@ import com.google.android.gms.tasks.Task;
 import com.google.gson.Gson;
 
 import java.io.ByteArrayOutputStream;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Base64;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class EditFragment extends Fragment implements OnMapReadyCallback {
     private static final String TAG = "EditFragment";
+
+  private String manipulatedToken ;
 
     TextView tv_email ,tv_name ,tv_address ,tv_coordinates ,tv_age ,tv_phone;
     ImageView iv_image ,iv_editProfilePic,iv_editName,iv_editPhone,iv_editCoordinates,iv_editAddress
@@ -60,6 +73,9 @@ public class EditFragment extends Fragment implements OnMapReadyCallback {
 
     Coordinates coordinates = null;
     FusedLocationProviderClient fusedLocationClient;
+    private String editString = "";
+    private String passwordString = "";
+    private String confirmPasswordString = "";
     View v = null;
     private static final int CAMERA_REQUEST = 1888;
     private static final int MY_CAMERA_PERMISSION_CODE = 100;
@@ -81,10 +97,11 @@ public class EditFragment extends Fragment implements OnMapReadyCallback {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         SharedPreferences sharedPref = this.getActivity().getSharedPreferences(
                 token_key, Context.MODE_PRIVATE);
         String token =sharedPref.getString(token_key, null);
+        manipulatedToken="aaabbb"+token;
+
         Log.d(TAG,"the Coming token is "+token);
 
         //convert token
@@ -94,13 +111,24 @@ public class EditFragment extends Fragment implements OnMapReadyCallback {
         PharmacyProfile profile =  new Gson().fromJson(payload,PharmacyProfile.class);
 
         //Assign Data
+        Log.d(TAG, "profile object:"+ profile);
         assignData(profile);
 
-           // Log.d(TAG,"Chunks error");
+    }
 
-
-
-
+    @SuppressLint("SetTextI18n")
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private void assignData(PharmacyProfile profile){
+        tv_name.setText(profile.name);
+        tv_email.setText(profile.email);
+        tv_phone.setText(Arrays.toString(profile.getPhones()));
+        tv_address.setText(profile.locationAsAddress);
+        Log.d(TAG, "coordinates: "+profile.locationAsCoordinates);
+        tv_coordinates.setText((profile.locationAsCoordinates.getCoordinates().getLat()
+                +" \n"+profile.locationAsCoordinates.getCoordinates().getLon())+"");
+        if (!(photo ==null)) {
+            iv_image.setImageBitmap(convertToBitmap(photo));
+        }
     }
 
     private void initViews(View root){
@@ -121,7 +149,6 @@ public class EditFragment extends Fragment implements OnMapReadyCallback {
         iv_editProfilePic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                editProfilePic();
 
             }
         });
@@ -155,93 +182,70 @@ public class EditFragment extends Fragment implements OnMapReadyCallback {
             public void onClick(View v) {
                 setupLocationClient();
                 getCurrentLocation();
+                editCoordinates(manipulatedToken,new EditCoordinatesObject(coordinates));
             }
         });
     }
 
-    private void editProfilePic() {
-/*
-        iv_editProfilePic.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String setup = new PickSetup()
-                        .setTitle("Pick an image from")
-                        .setTitleColor(Color.BLACK)
-                        .setBackgroundColor(Color.WHITE)
-                        .setCancelText("Cancel")
-                        .setCancelTextColor(Color.BLACK)
-                        .setButtonTextColor(Color.BLACK)
-                        .setDimAmount(16f)
-                        .setFlip(true).setMaxSize(60)
-                        .setPickTypes(EPickType.GALLERY, EPickType.CAMERA)
-                        .setCameraButtonText("Camera")
-                        .setGalleryButtonText("Gallery")
-                        .setIconGravity(Gravity.START)
-                        .setButtonOrientation(LinearLayout.HORIZONTAL)
-                        .setSystemDialog(false)
-                        .setGalleryIcon(R.drawable.gallery)
-                        .setCameraIcon(R.drawable.camera)
-                        .setGalleryChooserTitle("Gallery")
-                        .setCameraChooserTitle("Camera")
-                new PickImageDialog.build(setup)
-                        .setOnPickResult {
-                    iv_image.setImageBitmap(it.bitmap)
-                    lifecycleScope.launch(Dispatchers.IO) {
-                        getBase64String(it.bitmap)?.let { imageString -> new PhotoDataClass(imageString) }
-                            ?.let { photoDataClassObject ->
-                                viewModel.editCustomerPhoto(
-                                        manipulatedToken,
-                                        photoDataClassObject
-                                )
-                        }
-                    }
-                }.show(activity)
 
-
-            }
-        });
-
-
-*/
-
-    }
-
-    @SuppressLint("SetTextI18n")
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    private void assignData(PharmacyProfile profile){
-        tv_name.setText(profile.name);
-        tv_email.setText(profile.email);
-        tv_phone.setText(Arrays.toString(profile.getPhones()));
-        tv_address.setText(profile.locationAsAddress);
-        Log.d(TAG, "coordinates: "+profile.locationAsCoordinates);
-        tv_coordinates.setText((profile.locationAsCoordinates.getLat()
-                        +profile.locationAsCoordinates.getLon())+"");
-        if (!(photo ==null)) {
-            iv_image.setImageBitmap(convertToBitmap(photo));
-        }
-    }
 
     public void nameDialog() {
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getContext());
         LayoutInflater inflater = this.getLayoutInflater();
         final View dialogView = inflater.inflate(R.layout.edit_name_dialog, null);
         dialogBuilder.setView(dialogView);
+        dialogView.<EditText>findViewById(R.id.newNameET).addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-        final EditText newNameET = (EditText) dialogView.findViewById(R.id.newNameET);
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                editString=s.toString();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
 
         dialogBuilder.setPositiveButton("Save", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
                // newNameET.getText().toString();
                 Toast.makeText(getContext(),"Saved",Toast.LENGTH_SHORT).show();
+                editName(manipulatedToken,new EditNameObject(editString));
+                tv_name.setText(editString);
             }
         });
         dialogBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
                 //pass
+                Toast.makeText(getContext(),"Canceled",Toast.LENGTH_SHORT).show();
             }
         });
         AlertDialog b = dialogBuilder.create();
         b.show();
+    }
+
+    public void editName(String token,EditNameObject editNameObject){
+        APIHelper.api.editName(token, editNameObject).enqueue(new Callback<PharmacyRespond>() {
+            @Override
+            public void onResponse(Call<PharmacyRespond> call, Response<PharmacyRespond> response) {
+                Toast.makeText(getContext(),"edit name response"+response.body().getMsg(),
+                        Toast.LENGTH_SHORT).show();
+                Log.d(TAG,"response Success"+response.body().getMsg());
+            }
+
+            @Override
+            public void onFailure(Call<PharmacyRespond> call, Throwable t) {
+                Log.d(TAG,"response Failed"+t);
+
+            }
+        });
     }
 
     public void addressDialog() {
@@ -249,20 +253,56 @@ public class EditFragment extends Fragment implements OnMapReadyCallback {
         LayoutInflater inflater = this.getLayoutInflater();
         final View dialogView = inflater.inflate(R.layout.edit_address_dialog, null);
         dialogBuilder.setView(dialogView);
+        dialogView.<EditText>findViewById(R.id.newAddressET).addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                editString=s.toString();
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
 
         dialogBuilder.setPositiveButton("Save", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
                 //do something with edt.getText().toString();
+                editAddress(manipulatedToken,new EditAddressObject(editString));
+                tv_address.setText(editString);
                 Toast.makeText(getContext(),"Saved",Toast.LENGTH_SHORT).show();
             }
         });
         dialogBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
                 //pass
+                Toast.makeText(getContext(),"Canceled",Toast.LENGTH_SHORT).show();
             }
         });
         AlertDialog b = dialogBuilder.create();
         b.show();
+    }
+
+    private void editAddress(String token,EditAddressObject editAddressObject) {
+        new APIHelper();
+        APIHelper.api.editAddress(token,editAddressObject).enqueue(new Callback<PharmacyRespond>() {
+            @Override
+            public void onResponse(Call<PharmacyRespond> call, Response<PharmacyRespond> response) {
+                Toast.makeText(getContext(),"edit Address response"+response.body().getMsg(),
+                        Toast.LENGTH_SHORT).show();
+                Log.d(TAG,"edit Address response Success"+response.body().getMsg());
+            }
+
+            @Override
+            public void onFailure(Call<PharmacyRespond> call, Throwable t) {
+                Log.d(TAG,"edit Address response Failed"+t);
+
+            }
+        });
     }
 
     public void phoneDialog() {
@@ -270,21 +310,74 @@ public class EditFragment extends Fragment implements OnMapReadyCallback {
         LayoutInflater inflater = this.getLayoutInflater();
         final View dialogView = inflater.inflate(R.layout.edit_phone_dialog, null);
         dialogBuilder.setView(dialogView);
+        ArrayList<String> phones=new ArrayList<String>();
+        dialogView.<EditText>findViewById(R.id.newAddressET).addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                editString= s.toString();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
 
         dialogBuilder.setPositiveButton("Save", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
                 //do something with edt.getText().toString();
                 Toast.makeText(getContext(),"Saved",Toast.LENGTH_SHORT).show();
+                phones.remove(phones);
+                phones.add(editString);
+                editPhone(manipulatedToken,new EditPhonesObject((phones)));
+                tv_phone.setText(editString);
             }
         });
         dialogBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
                 //pass
+                Toast.makeText(getContext(),"Canceled",Toast.LENGTH_SHORT).show();
             }
         });
         AlertDialog b = dialogBuilder.create();
         b.show();
     }
+
+    private void editPhone(String token,EditPhonesObject editPhonesObject){
+        APIHelper.api.editPhone(token,editPhonesObject).enqueue(new Callback<PharmacyRespond>() {
+            @Override
+            public void onResponse(Call<PharmacyRespond> call, Response<PharmacyRespond> response) {
+                Log.d(TAG,"Edit phone response Success:"+response.body().getMsg());
+            }
+
+            @Override
+            public void onFailure(Call<PharmacyRespond> call, Throwable t) {
+                Log.d(TAG,"Edit phone response Failed:"+t);
+
+
+            }
+        });
+
+    }
+
+    private void editCoordinates(String token,EditCoordinatesObject editCoordinatesObject){
+        APIHelper.api.editCoordinates(token,editCoordinatesObject).enqueue(new Callback<PharmacyRespond>() {
+            @Override
+            public void onResponse(Call<PharmacyRespond> call, Response<PharmacyRespond> response) {
+                Log.d(TAG,"edit coordinates response Success :"+response.body().getMsg());
+            }
+
+            @Override
+            public void onFailure(Call<PharmacyRespond> call, Throwable t) {
+                Log.d(TAG,"edit coordinates response Failed :"+t);
+            }
+        });
+    }
+
 
     public void passwordDialog() {
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getContext());
@@ -301,11 +394,29 @@ public class EditFragment extends Fragment implements OnMapReadyCallback {
         dialogBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
                 //pass
+                Toast.makeText(getContext(),"Canceled",Toast.LENGTH_SHORT).show();
+
             }
         });
         AlertDialog b = dialogBuilder.create();
         b.show();
     }
+
+    private void editPassword(String token,EditPasswordObject editPasswordObject){
+        APIHelper.api.editPassword(token,editPasswordObject).enqueue(new Callback<PharmacyRespond>() {
+            @Override
+            public void onResponse(Call<PharmacyRespond> call, Response<PharmacyRespond> response) {
+            Log.d(TAG,"edit password respond Success :"+response.body().getMsg());
+            }
+
+            @Override
+            public void onFailure(Call<PharmacyRespond> call, Throwable t) {
+                Log.d(TAG,"edit password respond Failed :"+t);
+
+            }
+        });
+    }
+
 
 
     @Override
@@ -392,5 +503,4 @@ public class EditFragment extends Fragment implements OnMapReadyCallback {
         byte[] byteArray= byteArrayOutputStream.toByteArray();
         return android.util.Base64.encodeToString(byteArray, android.util.Base64.DEFAULT);
         }
-
 }
