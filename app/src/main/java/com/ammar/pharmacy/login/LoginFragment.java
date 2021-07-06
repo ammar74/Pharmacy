@@ -39,6 +39,7 @@ import static com.ammar.pharmacy.retrofit.APIHelper.api;
 public class LoginFragment extends Fragment {
 
     public static final String token_key = "100001" ;
+    public static final String photo_key = "1000021";
     private static final String TAG = "LoginFragment";
     LinearLayout firstLinear, secondLinear, thirdLinear;
     ImageView pharmacyLogo, emailIV, passwordIV;
@@ -112,6 +113,9 @@ public class LoginFragment extends Fragment {
                     SharedPreferences sharedPref = getActivity().getSharedPreferences(
                             token_key, Context.MODE_PRIVATE);
                     sharedPref.edit().putString(token_key,body.getToken()).apply();
+                    SharedPreferences sharedPref1 = getActivity().getSharedPreferences(
+                            photo_key, Context.MODE_PRIVATE);
+                    sharedPref1.edit().putString(photo_key,body.getPhoto()).apply();
                     getActivity().findViewById(R.id.bottomNavigationView).setVisibility(View.VISIBLE);
                 //  bottomNavigationView.setVisibility(View.VISIBLE);
                     loadFragment(new CurrentOrdersFragment());

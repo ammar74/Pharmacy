@@ -13,4 +13,11 @@ public class LocationAsCoordinates {
     public LocationAsCoordinates(Coordinates coordinates){
         this.coordinates = coordinates ;
     }
+
+    @Override
+    public String toString() {
+        return "LocationAsCoordinates{" +
+                "coordinates=" + coordinates +
+                '}';
+    }
 }

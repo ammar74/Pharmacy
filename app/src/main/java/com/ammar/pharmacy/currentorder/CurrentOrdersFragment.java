@@ -23,14 +23,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ammar.pharmacy.R;
+import com.ammar.pharmacy.more.PharmacyResponse;
 import com.ammar.pharmacy.retrofit.APIHelper;
 
+import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 import static com.ammar.pharmacy.login.LoginFragment.token_key;
 import static com.ammar.pharmacy.retrofit.APIHelper.api;
+
+import java.util.concurrent.TimeUnit;
 
 
 public class CurrentOrdersFragment extends Fragment {
@@ -51,6 +55,11 @@ public class CurrentOrdersFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+       /* OkHttpClient innerClient = new OkHttpClient.Builder()
+                .connectTimeout(5, TimeUnit.MINUTES) // connect timeout
+                .writeTimeout(5, TimeUnit.MINUTES) // write timeout
+                .readTimeout(5, TimeUnit.MINUTES) // read timeout
+                .build();*/
         tv=view.findViewById(R.id.active_orders_tv);
         PrescriptionDetails = view.findViewById(R.id.PrescriptionDetails);
         PrescriptionDetails_tv = view.findViewById(R.id.PrescriptionDetails_tv);
@@ -176,21 +185,21 @@ public class CurrentOrdersFragment extends Fragment {
 
     public void PharmacyAgree(String token,IdWrapper idWrapper){
         new APIHelper();
-        api.PharmacyAgree(token,idWrapper).enqueue(new Callback<PharmacyRespond>() {
+        api.PharmacyAgree(token,idWrapper).enqueue(new Callback<PharmacyResponse>() {
             @Override
-            public void onResponse(Call<PharmacyRespond> call, Response<PharmacyRespond> response) {
+            public void onResponse(Call<PharmacyResponse> call, Response<PharmacyResponse> response) {
                 Log.d(TAG,"in agree: order id is"+order_id);
                 Log.d(TAG, "Pharmacy Agree success " + response.body());
                 if (response.body()!=null)
                 {
-                    if (response.body().getMsg()=="success")
+                    if (response.body().getMessage()=="success")
                         Toast.makeText(getContext(),"Order Accepted",Toast.LENGTH_LONG).show();
                         loadFragment(new CurrentOrdersFragment());
                 }
             }
 
             @Override
-            public void onFailure(Call<PharmacyRespond> call, Throwable t) {
+            public void onFailure(Call<PharmacyResponse> call, Throwable t) {
                 Log.d(TAG, "Pharmacy Agree fail " +t);
 
             }
@@ -200,14 +209,14 @@ public class CurrentOrdersFragment extends Fragment {
 
     public void PharmacyNotAgree(String token,IdWrapper idWrapper){
         new APIHelper();
-        api.PharmacyNotAgree(token,idWrapper).enqueue(new Callback<PharmacyRespond>() {
+        api.PharmacyNotAgree(token,idWrapper).enqueue(new Callback<PharmacyResponse>() {
             @Override
-            public void onResponse(Call<PharmacyRespond> call, Response<PharmacyRespond> response) {
+            public void onResponse(Call<PharmacyResponse> call, Response<PharmacyResponse> response) {
                 Log.d(TAG,"in refuse: order id is"+order_id);
-                Log.d(TAG, "Pharmacy not Agree success " + response.body());
+                Log.d(TAG, "Pharmacy not Agree success " + response.body().getMessage());
                 if (response.body()!=null)
                 {
-                    if (response.body().getMsg()=="success")
+                    if (response.body().getMessage()=="success")
                         Toast.makeText(getContext(),"Order Denied",Toast.LENGTH_LONG).show();
                         loadFragment(new CurrentOrdersFragment());
                 }
@@ -216,7 +225,8 @@ public class CurrentOrdersFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<PharmacyRespond> call, Throwable t) {
+            public void onFailure(Call<PharmacyResponse> call, Throwable t) {
+                Log.d(TAG, "Pharmacy not Agree Failed " + t);
 
             }
         });

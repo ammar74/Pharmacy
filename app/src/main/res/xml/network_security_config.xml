@@ -18,6 +18,7 @@
         <domain includeSubdomains="true">192.168.1.12</domain>
         <domain includeSubdomains="true">192.168.1.13</domain>
         <domain includeSubdomains="true">192.168.1.14</domain>
+        <domain includeSubdomains="true">192.168.1.15</domain>
         <domain includeSubdomains="true">192.168.1.27</domain>
         <domain includeSubdomains="true">192.168.43.40</domain>
         <domain includeSubdomains="true">localhost</domain>

@@ -8,7 +8,7 @@ import java.util.Arrays;
 public class PharmacyProfile {
     String name;
     String email;
-    private String[] phones;
+    private Number[] phones;
     String locationAsAddress;
     LocationAsCoordinates locationAsCoordinates;
     double rate;
@@ -27,11 +27,22 @@ public class PharmacyProfile {
                 '}';
     }
 
-    public String[] getPhones() {
+    public Number[] getPhones() {
         return phones;
     }
 
-    public void setPhones(String[] phones) {
+    public void setPhones(Number[] phones) {
         this.phones = phones;
+    }
+
+    public PharmacyProfile(String name, String email, Number[] phones, String locationAsAddress,
+                           LocationAsCoordinates locationAsCoordinates, double rate, Boolean verified) {
+        this.name = name;
+        this.email = email;
+        this.phones = phones;
+        this.locationAsAddress = locationAsAddress;
+        this.locationAsCoordinates = locationAsCoordinates;
+        this.rate = rate;
+        this.verified = verified;
     }
 }
