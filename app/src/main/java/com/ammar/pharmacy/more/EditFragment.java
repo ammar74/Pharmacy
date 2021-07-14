@@ -89,6 +89,7 @@ public class EditFragment extends Fragment implements OnMapReadyCallback {
     private int pickImage = 1006;
 
     String photo;
+    String mPhoto = "";
     public EditFragment() {
         // Required empty public constructor
     }
@@ -114,19 +115,22 @@ public class EditFragment extends Fragment implements OnMapReadyCallback {
         SharedPreferences sharedPref1 = this.getActivity().getSharedPreferences(
                 photo_key, Context.MODE_PRIVATE);
         photo =sharedPref.getString(photo_key, null);
+        Log.d(TAG,"photo is : "+photo);
 
 
         Log.d(TAG,"the Coming token is "+token);
 
         //convert token
         String[] chunks = token.split("\\.");
-        Base64.Decoder decoder = Base64.getDecoder();
-        String payload =new String(decoder.decode(chunks[1]));
+        Log.d(TAG,"chunks: "+chunks[1]);
+            Base64.Decoder decoder = Base64.getUrlDecoder();
+            String payload = new String(decoder.decode(chunks[1]));
         PharmacyProfile profile =  new Gson().fromJson(payload,PharmacyProfile.class);
 
         //Assign Data
         Log.d(TAG, "profile object:"+ profile);
         assignData(profile);
+
 
     }
 
@@ -141,7 +145,12 @@ public class EditFragment extends Fragment implements OnMapReadyCallback {
         tv_coordinates.setText((profile.locationAsCoordinates.getCoordinates().getLat()
                 +" \n"+profile.locationAsCoordinates.getCoordinates().getLon())+"");
         if ((photo !=null)) {
-            iv_image.setImageBitmap(convertToBitmap(photo));
+            if (photo.contains("data:image/jpeg;base64")) {
+                mPhoto = removePrefix(photo, "data:image/jpeg;base64");
+            } else if (photo.contains("data:image/png;base64")) {
+                mPhoto = removePrefix(photo, "data:image/png;base64");
+            }
+            iv_image.setImageBitmap(convertToBitmap(mPhoto));
         }
     }
 
@@ -199,6 +208,7 @@ public class EditFragment extends Fragment implements OnMapReadyCallback {
                 setupLocationClient();
                 getCurrentLocation();
                 editCoordinates(manipulatedToken,new EditCoordinatesObject(coordinates));
+
             }
         });
     }
@@ -456,6 +466,7 @@ public class EditFragment extends Fragment implements OnMapReadyCallback {
             public void onResponse(Call<PharmacyResponse> call, Response<PharmacyResponse> response) {
                 Log.d(TAG,"edit coordinates response Success :"+response.body().getMessage());
                 Toast.makeText(getContext(),""+response.message(),Toast.LENGTH_SHORT).show();
+                tv_coordinates.setText(response.body().message);
             }
 
             @Override
@@ -499,11 +510,11 @@ public class EditFragment extends Fragment implements OnMapReadyCallback {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 passwordString = s.toString();
-                if (passwordString.length()<8)
-                {dialogView.<TextView>findViewById(R.id.error_message_TV).
+                if (passwordString.length()<8) {
+                    dialogView.<TextView>findViewById(R.id.error_message_TV).
                         setText("Your Password must be at least 8 characters");
                 } else {dialogView.<TextView>findViewById(R.id.error_message_TV).
-                        setText("Your Password must be at least 8 characters");}
+                        setText("");}
             }
 
             @Override
@@ -522,9 +533,9 @@ public class EditFragment extends Fragment implements OnMapReadyCallback {
                 if (confirmPasswordString.length()<8)
                 {dialogView.<TextView>findViewById(R.id.error_message_TV).
                         setText("Your Password must be at least 8 characters");
-                } else if (passwordString !=confirmPasswordString)
+                } else if (!passwordString.equals(confirmPasswordString))
                 {dialogView.<TextView>findViewById(R.id.error_message_TV).
-                        setText("\"Password and confirm password doesn't match");}
+                        setText("Password and confirm password doesn't match");}
                 else {
                     dialogView.<TextView>findViewById(R.id.error_message_TV).setText("");
                 }
@@ -698,4 +709,12 @@ public class EditFragment extends Fragment implements OnMapReadyCallback {
         byte[] byteArray= byteArrayOutputStream.toByteArray();
         return android.util.Base64.encodeToString(byteArray, android.util.Base64.DEFAULT);
         }
+
+    public static String removePrefix(String s, String prefix)
+    {
+        if (s != null && prefix != null && s.startsWith(prefix)) {
+            return s.substring(prefix.length());
+        }
+        return s;
+    }
 }

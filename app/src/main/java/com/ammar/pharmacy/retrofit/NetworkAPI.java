@@ -39,8 +39,8 @@ public interface NetworkAPI {
     @GET("getOrders")
     Call<GetOrdersReturnBody> getOrders(@Header("token")String token );
 
-    @POST("currentOrderPharmacy/{orderId}")
-    Call<OrderDetailsResponse> orderInfo(@Path("orderId") String orderId);
+    @GET("currentOrderPharmacy/{orderId}")
+    Call<OrderDetailsResponse> orderInfo(@Header("token")String token,@Path("orderId") String orderId);
 
     @GET("pharmacyCurrentOrders")
     Call<AcceptedOrdersReturn> acceptedOrders(@Header("token")String token);

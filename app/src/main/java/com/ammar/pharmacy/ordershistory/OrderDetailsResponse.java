@@ -8,6 +8,15 @@ public class OrderDetailsResponse {
     CustomersData customersData;
     String message;
 
+    @Override
+    public String toString() {
+        return "OrderDetailsResponse{" +
+                "orderData=" + orderData +
+                ", customersData=" + customersData +
+                ", message='" + message + '\'' +
+                '}';
+    }
+
     public OrderDetailsResponse(Order orderData, CustomersData customersData, String message) {
         this.orderData = orderData;
         this.customersData = customersData;

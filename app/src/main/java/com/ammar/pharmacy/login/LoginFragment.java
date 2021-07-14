@@ -115,6 +115,7 @@ public class LoginFragment extends Fragment {
                     sharedPref.edit().putString(token_key,body.getToken()).apply();
                     SharedPreferences sharedPref1 = getActivity().getSharedPreferences(
                             photo_key, Context.MODE_PRIVATE);
+                    Log.d(TAG, "photo is: "+body.getPhoto());
                     sharedPref1.edit().putString(photo_key,body.getPhoto()).apply();
                     getActivity().findViewById(R.id.bottomNavigationView).setVisibility(View.VISIBLE);
                 //  bottomNavigationView.setVisibility(View.VISIBLE);
